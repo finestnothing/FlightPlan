@@ -1,0 +1,68 @@
+<!-- Splash Page and Survey -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Flight Plan</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="Style/style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="topCenter">
+            <p id="FlightPlanTop">Flight Plan</p>
+            <p>How To Get To Sac State</p>
+        </div>
+        <div class="topLeft">
+            <img class="headerButton" alt="Sac State logo" src="https://www.csus.edu/NewCSUS2019-global-assets/_internal/images/logo-horizontal.png">
+            <span>University Transportation and Parking Services</span>
+        </div>
+        <div class="survey">
+            <div class="surveyInitial">
+                <p>Please take this short survey to let us customize your options.</p>
+                    <div id="surveyStart">
+                        <p>Begin Survey</p>
+                    </div>
+            </div>
+        </div>
+
+
+
+        <div class="modal" id="theSurvey">
+            <div id="survey-title">
+                <div class="close-button" id="close-button">
+                    <img src="Images/close.png"  alt="Close Icon by Vaadin Icons"  ><!--Want to make our own.-->
+                </div>
+            </div>
+            <div class="modal-guts">
+                <h1>HELLO WORLD</h1>
+                <form action="/flightPlan/takeFlight"  method="post">
+                    <p>Address: <input type="text" id="address" name="address"/></p>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+
+        </div>
+        <div class="modal-overlay" id="modal-overlay">
+                
+        </div>
+    </body>
+    <script>
+        var theSurvey = document.querySelector("#theSurvey");
+        var modalOverlay = document.querySelector("#modal-overlay");
+        var closeButton = document.querySelector("#close-button");
+        var surveyStart = document.querySelector("#surveyStart");
+        theSurvey.classList.toggle("closed");
+        modalOverlay.classList.toggle("closed");
+        closeButton.addEventListener("click", function(){
+            theSurvey.classList.toggle("closed");
+            modalOverlay.classList.toggle("closed");
+        });
+        surveyStart.addEventListener("click", function(){
+            theSurvey.classList.toggle("closed");
+            modalOverlay.classList.toggle("closed");
+        });
+
+
+    </script>
+</html>
