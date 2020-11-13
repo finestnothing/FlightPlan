@@ -7,6 +7,7 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" href="Style/style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="jquery-3.5.1.min.js"></script>
     </head>
     <body>
         <div class="topCenter">
@@ -20,6 +21,7 @@
         <div class="survey">
             <div class="surveyInitial">
                 <p>Please take this short survey to let us customize your options.</p>
+                <a href="takeFlight.html">takeFlight</a>
                     <div id="surveyStart">
                         <p>Begin Survey</p>
                     </div>
@@ -34,6 +36,7 @@
                     <img src="Images/close.png"  alt="Close Icon by Vaadin Icons"  ><!--Want to make our own.-->
                 </div>
             </div>
+        
             <div class="modal-guts">
                 <h1>HELLO WORLD</h1>
                 <form action="/flightPlan/takeFlight"  method="post">
@@ -41,7 +44,6 @@
                     <input type="submit" value="Submit">
                 </form>
             </div>
-
         </div>
         <div class="modal-overlay" id="modal-overlay">
                 
