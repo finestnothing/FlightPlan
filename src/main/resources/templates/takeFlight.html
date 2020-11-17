@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Take Flight</title>
+        <title>Take Flight ${foo}</title>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="../Style/takeFlightStyle.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +10,7 @@
         </style>
     </head>
     <body onscroll="scrollFunction()">
+        <p th:text="'Hello, ' + ${name} + '!'" />
         <!-- Header --> 
         <div class="headerBar">
             <a href = "https://www.csus.edu/"><img class="headerButton" alt="Sac State logo" src="https://www.csus.edu/NewCSUS2019-global-assets/_internal/images/logo-horizontal.png"></a>
@@ -19,8 +20,8 @@
                 <a href = "https://www.csus.edu/campaign/" class="headerButton">GIVE</a>
             </div>
         </div>
-        <div class="close-button" class="close-button">
-            <img src="Images/close.png"  alt="Close Icon by Vaadin Icons"  ><!--Want to make our own.-->
+        <div class="close-button">
+            <img src="../Images/close.png"  alt="Close Icon by Vaadin Icons"  ><!--Want to make our own.-->
         </div>
         <span class="topPrompt">Ranked Option.<br>Click on an option or scroll for more information.</span>
         <div class="rankBar" id="rankBar1">
@@ -78,5 +79,11 @@
         </div>
 
         <script src="../scripts/text_elements.js"></script>
+        
+        <script>
+            var msg = "";
+        </script>
+
+    <p>th:text="${name} ?: 'nono'"</p>
     </body>
 </html>
