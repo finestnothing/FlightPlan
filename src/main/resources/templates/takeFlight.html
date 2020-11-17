@@ -1,15 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Take Flight</title>
+        <title>Take Flight ${foo}</title>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="Style/takeFlightStyle.css">
+        <link rel="stylesheet" href="../Style/takeFlightStyle.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
         
         </style>
     </head>
     <body onscroll="scrollFunction()">
+        <!--Some template testing. This is how you can add the response to the html text. How to use with js is below-->
+        <p>Address: <span th:text="${address}"></span></p>
+        <p>Travel Time CAR: <span th:text="${travelTimeByCar}"></span></p>
+        <p>Travel Time Walking: <span th:text="${travelTimeByWalking}"></span></p>
+        <p>MPG: <span th:text="${mpg}"></span></p>
+        <p>Insurence Rate: <span th:text="${insurenceRate}"></span></p>
         <!-- Header --> 
         <div class="headerBar">
             <a href = "https://www.csus.edu/"><img class="headerButton" alt="Sac State logo" src="https://www.csus.edu/NewCSUS2019-global-assets/_internal/images/logo-horizontal.png"></a>
@@ -19,64 +25,71 @@
                 <a href = "https://www.csus.edu/campaign/" class="headerButton">GIVE</a>
             </div>
         </div>
-        <div class="close-button" class="close-button">
-            <img src="Images/close.png"  alt="Close Icon by Vaadin Icons"  ><!--Want to make our own.-->
+        <div class="close-button">
+            <img src="../Images/close.png"  alt="Close Icon by Vaadin Icons"  ><!--Want to make our own.-->
         </div>
         <span class="topPrompt">Ranked Option.<br>Click on an option or scroll for more information.</span>
         <div class="rankBar" id="rankBar1">
             <div class="rankButton" id="carButton" onclick="onCarClick()">
-                <img src="Images/SacState_Vehicle.jpg" alt="Car">
+                <img src="../Images/SacState_Vehicle.jpg" alt="Car">
                 <p>Single-Occupant Car</p>
             </div>
             <div class="rankButton" id="carpoolButton" onclick="onCarpoolClick()">
-                <img src="Images/SacState_Vehicle.jpg" alt="Car">
+                <img src="../Images/SacState_Vehicle.jpg" alt="Car">
                 <p>Carpool</p>
             </div>
             <div class="rankButton" id="busButton" onclick="onBusClick()">
-                <img src="Images/SacState_Vehicle.jpg" alt="Car">
+                <img src="../Images/SacState_Vehicle.jpg" alt="Car">
                 <p>Bus</p>
             </div>
             <div class="rankButton" id="shuttleButton" onclick="onShuttleClick()">
-                <img src="Images/SacState_Vehicle.jpg" alt="Car">
+                <img src="../Images/SacState_Vehicle.jpg" alt="Car">
                 <p>Shuttle</p>
             </div>
             <div class="rankButton" id="bikeButton" onclick="onBikeClick()">
-                <img src="Images/SacState_Vehicle.jpg" alt="Car">
+                <img src="../Images/SacState_Vehicle.jpg" alt="Car">
                 <p>Biking</p>
             </div>
             <div class="rankButton" id="walkButton" onclick="onWalkClick()">
-                <img src="Images/SacState_Vehicle.jpg" alt="Walk">
+                <img src="../Images/SacState_Vehicle.jpg" alt="Walk">
                 <p>Walking</p>
             </div>
         </div>
 
         <div class="rankOptions">
             <div class="rankedOption" id="carOption">
-                <img src="Images/SacState_Vehicle.jpg" alt="Car">
+                <img src="../Images/SacState_Vehicle.jpg" alt="Car">
                 <p>Single-Occupant Car</p>
             </div>
             <div class="rankedOption" id="carpoolOption">
-                <img src="Images/SacState_Vehicle.jpg" alt="Carpool">
+                <img src="../Images/SacState_Vehicle.jpg" alt="Carpool">
                 <p>Carpool</p>
             </div>
             <div class="rankedOption" id="busOption">
-                <img src="Images/SacState_Vehicle.jpg" alt="Bus">
+                <img src="../Images/SacState_Vehicle.jpg" alt="Bus">
                 <p>Bus</p>
             </div>
             <div class="rankedOption" id="shuttleOption">
-                <img src="Images/SacState_Vehicle.jpg" alt="Shuttle">
+                <img src="../Images/SacState_Vehicle.jpg" alt="Shuttle">
                 <p>Shuttle</p>
             </div>
             <div class="rankedOption" id="bikeOption">
-                <img src="Images/SacState_Vehicle.jpg" alt="Biking">
+                <img src="../Images/SacState_Vehicle.jpg" alt="Biking">
                 <p>Biking</p>
             </div>
             <div class="rankedOption" id="walkOption">
-                <img src="Images/SacState_Vehicle.jpg" alt="Walking">
+                <img src="../Images/SacState_Vehicle.jpg" alt="Walking">
                 <p>Walking</p>
             </div>
         </div>
 
-        <script src="scripts/text_elements.js"></script>
+        <script src="../scripts/text_elements.js"></script>
+        <!--Here is where we create our global vars to use in scripts! Needs to be in the html, not js file-->
+        <script th:inline="javascript">
+            var address = /*[[${address}]]*/ "Lodi, CA"; //If you open this page statically  "Lodi, CA" is the value, otherwise everything in this line is replaced by 'well formed' javascript."
+            var address = /*[[${travelTimeByCar}]]*/ "60 min"; 
+            var address = /*[[${mpg}]]*/ "12.3"; 
+            var address = /*[[${insurenceRate}]]*/ "80"; 
+        </script>
     </body>
 </html>
