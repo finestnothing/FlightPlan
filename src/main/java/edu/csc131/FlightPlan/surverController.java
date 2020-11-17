@@ -10,7 +10,6 @@ import com.google.maps.model.DistanceMatrix;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +25,7 @@ public class surverController {
     private UserData n = new UserData();
     
     @PostMapping(path="/takeFlight") // Map ONLY POST Requests
-    public String saveData (@RequestParam String address, Model model) {
+    public String saveData (@RequestParam String address, @RequestParam double mpg, @RequestParam("insRate") double insurenceRate) {
       // @ResponseBody means the returned String is the response, not a view name
       // @RequestParam means it is a parameter from the GET or POST request
 
@@ -68,18 +67,22 @@ public class surverController {
       
       n.setAddress(address);
       n.setTravelTime(travelTime);
+      n.setInsurenceRate(insurenceRate);
+      n.setMpg(mpg);
 
 
 
-      //dataRepo.save(n);
+      dataRepo.save(n);
       return "redirect:/flightPlan/results";
     }
 
     @GetMapping(path="/results")
     public String getResults(Model model) {
       //ModelAndView mv = new ModelAndView();
-      model.addAttribute("name", n.getAddress());
-
+      model.addAttribute("address", n.getAddress());
+      model.addAttribute("travelTime", n.getTravelTime());
+      model.addAttribute("mpg", n.getMpg());
+      model.addAttribute("insurenceRate", n.getInsurenceRate());
       
       return "/takeFlight.html";
   }

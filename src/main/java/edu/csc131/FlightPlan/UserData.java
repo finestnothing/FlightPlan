@@ -13,7 +13,8 @@ public class UserData {
 
     private String address;
     private String travelTime;
-
+    private double insurenceRate;
+    private double mpg; 
     public Integer getId() {
         return id;
     }
@@ -36,6 +37,22 @@ public class UserData {
 
     public void setTravelTime(String travelTime) {
         this.travelTime = travelTime;
+    }
+
+    public double getInsurenceRate() {
+        return insurenceRate;
+    }
+
+    public void setInsurenceRate(double insurenceRate) {
+        this.insurenceRate = insurenceRate;
+    }
+
+    public double getMpg() {
+        return mpg;
+    }
+
+    public void setMpg(double mpg) {
+        this.mpg = mpg;
     }
     
 }
