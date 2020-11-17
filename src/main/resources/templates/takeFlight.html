@@ -12,7 +12,8 @@
     <body onscroll="scrollFunction()">
         <!--Some template testing. This is how you can add the response to the html text. How to use with js is below-->
         <p>Address: <span th:text="${address}"></span></p>
-        <p>Travel Time CAR: <span th:text="${travelTime}"></span></p>
+        <p>Travel Time CAR: <span th:text="${travelTimeByCar}"></span></p>
+        <p>Travel Time Walking: <span th:text="${travelTimeByWalking}"></span></p>
         <p>MPG: <span th:text="${mpg}"></span></p>
         <p>Insurence Rate: <span th:text="${insurenceRate}"></span></p>
         <!-- Header --> 
@@ -86,7 +87,7 @@
         <!--Here is where we create our global vars to use in scripts! Needs to be in the html, not js file-->
         <script th:inline="javascript">
             var address = /*[[${address}]]*/ "Lodi, CA"; //If you open this page statically  "Lodi, CA" is the value, otherwise everything in this line is replaced by 'well formed' javascript."
-            var address = /*[[${travelTime}]]*/ "60 min"; 
+            var address = /*[[${travelTimeByCar}]]*/ "60 min"; 
             var address = /*[[${mpg}]]*/ "12.3"; 
             var address = /*[[${insurenceRate}]]*/ "80"; 
         </script>

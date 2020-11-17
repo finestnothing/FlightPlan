@@ -36,16 +36,16 @@ public class ParseJSON {
      * @param json string to parse from the matrix api. 
      * @return A string of the human readable travel time. 
      */
-    String getTimeByCar(String json){
+    String getTime(String json){
 
         JSONArray arr = new JSONArray(json);
 
         JSONObject obj = arr.getJSONObject(0);
         
-        String travelTimeCar = obj.getJSONArray("elements").getJSONObject(0).getJSONObject("duration").get("humanReadable").toString();
+        String travelTime = obj.getJSONArray("elements").getJSONObject(0).getJSONObject("duration").get("humanReadable").toString();
 
-        System.out.println(travelTimeCar);
-        return travelTimeCar;
+        System.out.println(travelTime);
+        return travelTime;
     }
 ;
 }

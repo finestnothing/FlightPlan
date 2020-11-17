@@ -6,6 +6,7 @@ import com.google.maps.DistanceMatrixApi;
 
 import com.google.maps.GeoApiContext;
 import com.google.maps.model.DistanceMatrix;
+import com.google.maps.model.TravelMode;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,44 +30,15 @@ public class surverController {
       // @ResponseBody means the returned String is the response, not a view name
       // @RequestParam means it is a parameter from the GET or POST request
 
-
-
-      System.out.println("hi");
-      ModelAndView mv = new ModelAndView ();
-      mv.setViewName("/takeFlight.html");
-      mv.addObject("foo", "bar");
-      ParseJSON parser = new ParseJSON();
-      String json = null;
-      String[] orgins = new String[]{address};
-      String[] destinations = new String[]{"6000 J St, Sacramento, CA 95819"};
-
-      GeoApiContext context = new GeoApiContext.Builder()
-      .apiKey("AIzaSyCBpItlEi0pNJV5BJnarqUdQERjmK2t4JM")
-      .build();
-      try{
-        DistanceMatrix results = DistanceMatrixApi.getDistanceMatrix(context,
-        orgins,destinations).await();
-        Gson gson = new GsonBuilder().create();
-        
-        json = gson.toJson(results.rows);
-        System.out.println(json);
-
-      }catch(Exception e){
-        System.out.println(e);//YOU HAVE NO POWER HERE EXCEPTION!
-        json="";
-        //return "ERROR";
-      }finally{
-        
-      }
-
-      String travelTime = parser.getTimeByCar(json);
-      System.out.println(travelTime);
-
+      TimeTo time = new TimeTo(address);
+      String travelTimeByCar = time.getTimeByCar();
+      String travelTimeByWalk = time.getTimeByWalking();
 
   
       
       n.setAddress(address);
-      n.setTravelTime(travelTime);
+      n.settravelTimeByCar(travelTimeByCar);
+      n.setTravelTimeByWalking(travelTimeByWalk);
       n.setInsurenceRate(insurenceRate);
       n.setMpg(mpg);
 
@@ -80,7 +52,8 @@ public class surverController {
     public String getResults(Model model) {
       //ModelAndView mv = new ModelAndView();
       model.addAttribute("address", n.getAddress());
-      model.addAttribute("travelTime", n.getTravelTime());
+      model.addAttribute("travelTimeByCar", n.gettravelTimeByCar());
+      model.addAttribute("travelTimeByWalking", n.getTravelTimeByWalking());
       model.addAttribute("mpg", n.getMpg());
       model.addAttribute("insurenceRate", n.getInsurenceRate());
       
