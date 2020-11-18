@@ -33,16 +33,21 @@ public class ParseJSON {
 
     /**
      * 
-     * @param json string to parse from the matrix api. 
-     * @return A string of the human readable travel time. 
+     * @param json string to parse from the matrix api.
+     * @return A string of the human readable travel time.
+     * @throws NotValidAddressException
      */
-    String getTime(String json){
+    String getTime(String json) throws NotValidAddressException {
 
         JSONArray arr = new JSONArray(json);
-
+        String travelTime;
         JSONObject obj = arr.getJSONObject(0);
-        
-        String travelTime = obj.getJSONArray("elements").getJSONObject(0).getJSONObject("duration").get("humanReadable").toString();
+        if(obj.getJSONArray("elements").getJSONObject(0).get("status").toString().equalsIgnoreCase("ok")){
+          travelTime = obj.getJSONArray("elements").getJSONObject(0).getJSONObject("duration").get("humanReadable").toString();
+        }else{
+          travelTime = "ERROR";
+          throw new NotValidAddressException("Google API Unable to find address");
+        }
 
         System.out.println(travelTime);
         return travelTime;

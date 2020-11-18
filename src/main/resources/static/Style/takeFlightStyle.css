@@ -48,13 +48,8 @@ table {
 
 html{
     scroll-behavior: smooth;
-}
-html, body{
-    overflow-x: hidden;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    height: 100%;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 
 /* Header Bar with logo and menu */
@@ -63,7 +58,7 @@ html, body{
     background-color:gray;
     padding: 5px;
     line-height: auto;
-    margin: 0;
+    margin-bottom: 300px;
 }
 
 .headerButton{
@@ -117,15 +112,34 @@ img.headerButton:hover{
     position: sticky;
     top: 0;
     width: 100%;
-    min-height: 200px;
     background-color: rgba(220, 196, 142, 1);
-    margin-top: 1%;
+    display: flex;
+    z-index: 1;
+    background-color: #f1f1f1; /* Grey background */
+    padding-top: 50px;
+    padding-bottom: 50px;
+    color: black;
+    font-size: 1.5vw;
+    transition: 0.5s;
+    height: 20%;
+}
+
+.rankBarSmall{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background-color: rgba(220, 196, 142, 1);
     display: flex;
     z-index: 1;
     background-color: #f1f1f1; /* Grey background */
     padding: 50px 10px; /* Some padding */
     color: black;
-    font-size: 1.5vw;
+    font-size: 1vw;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    transition: 0.5s;
+    height: 10%;
 }
 
 .topPrompt{
@@ -136,21 +150,27 @@ img.headerButton:hover{
     font-size: 1.5vw;
 }
 .rankButton{
-    width: 15%;
+    width: 16%;
     text-align: center;
     border: 1px solid black;
     background-color: rgba(0, 78, 56, 0.7);
     transition-property: background-color;
     transition: 1s;
-    min-height: 50%;
-    max-height: 200px;
     margin: 0px auto;
-    padding-top: 50px;
-    padding-bottom: 50px;
+    padding: inherit;
+    height: inherit;
 }
 
-.rankButton img{
-    width: 100px;
+.rankBar img{
+    max-width: 95%;
+    height: 200px;
+    transition: inherit;
+}
+
+.rankBarSmall img{
+    max-width: 95%;
+    height: 150px;
+    transition: inherit;
 }
 
 .rankButton:hover{
@@ -168,6 +188,48 @@ img.headerButton:hover{
 
 .rankedOption{
     border: 1px solid black;
-    font-size: 60px;
     padding: 1%;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 30px;
+}
+.vType{
+    line-height: 70px;
+    font-size: 60px;
+    font-weight: 900;
+}
+
+.rankedOption img{
+    width: 30%;
+}
+
+#walkOption{
+    margin-bottom: 500px;
+}
+
+.returnSurvey{
+    position: fixed;
+    z-index: 5;
+    bottom: 10px;
+    right: 10px;
+    border: 1px solid black;
+    text-align: center;
+    line-height: 100px;
+    font-size: 30px;
+    font-weight: 1000;
+    padding: 0;
+}
+
+.returnSurvey a{
+    text-decoration: none;
+    color: black;
+    background-color: rgba(220, 196, 142, 0.3);
+    transition-property: background-color;
+    transition: 0.5s;
+    padding: 30px;
+}
+
+.returnSurvey a:hover{
+    background-color: rgba(220, 196, 142, 1);
+
 }
