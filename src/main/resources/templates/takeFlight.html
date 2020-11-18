@@ -87,7 +87,7 @@
         <!--Here is where we create our global vars to use in scripts! Needs to be in the html, not js file-->
         <script th:inline="javascript">
             var address = /*[[${address}]]*/ "Lodi, CA"; //If you open this page statically  "Lodi, CA" is the value, otherwise everything in this line is replaced by 'well formed' javascript."
-            var address = /*[[${travelTimeByCar}]]*/ "60 min"; 
+            var travelTimeByCar = /*[[${travelTimeByCar}]]*/ "60 min"; 
             var address = /*[[${mpg}]]*/ "12.3"; 
             var address = /*[[${insurenceRate}]]*/ "80"; 
         </script>
