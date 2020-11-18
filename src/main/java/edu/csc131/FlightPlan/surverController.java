@@ -46,50 +46,49 @@ public class surverController {
     try {
       time = new TimeTo(address);
     } catch (NotValidAddressException e) {
-      
+
       e.printStackTrace();
       return "/invalidAddress";
     }
-      //Get times
-      String travelTimeByCar = time.getTimeByCar();
-      String travelTimeByWalk = time.getTimeByWalking();
+    // Get times
+    String travelTimeByCar = time.getTimeByCar();
+    String travelTimeByWalk = time.getTimeByWalking();
 
-  
-      
-      userData.setAddress(address);
-      userData.settravelTimeByCar(travelTimeByCar);
-      userData.setTravelTimeByWalking(travelTimeByWalk);
-      userData.setInsurenceRate(insurenceRate);
-      userData.setMpg(mpg);
+    //TODO add transportation travel tiem
+    //TODO add bicycle travel time
 
+    userData.setAddress(address);
+    userData.settravelTimeByCar(travelTimeByCar);
+    userData.setTravelTimeByWalking(travelTimeByWalk);
+    userData.setInsurenceRate(insurenceRate);
+    userData.setMpg(mpg);
 
+    // adds the row to the database.
+    dataRepo.save(userData);
 
-      //adds the row to the database. 
-      dataRepo.save(userData);
+    // redirects to class member mapped to /results
+    return "redirect:/flightPlan/results";
+  }
 
-      //redirects to class member mapped to /results
-      return "redirect:/flightPlan/results";
-    }
-    /**
-     * 
-     * @param model
-     * @return Returns the View called takeFlight.html
-     * 
-     * We set can add attrbutes to the model here. 
-     * Thymeleaf then parses our html file, and replaces the corrasponding variables. 
-     * We can also do this with a jsp file instead og an htm file. 
-     * That gives us more toys, but I had trouble with Spring serving the file correctly. 
-     */
-    @GetMapping(path="/results")
-    public String getResults(Model model) {
-      //ModelAndView mv = new ModelAndView();
-      model.addAttribute("address", userData.getAddress());
-      model.addAttribute("travelTimeByCar", userData.gettravelTimeByCar());
-      model.addAttribute("travelTimeByWalking", userData.getTravelTimeByWalking());
-      model.addAttribute("mpg", userData.getMpg());
-      model.addAttribute("insurenceRate", userData.getInsurenceRate());
-      
-      return "/takeFlight.html";
+  /**
+   * 
+   * @param model
+   * @return Returns the View called takeFlight.html
+   * 
+   *         We set can add attrbutes to the model here. Thymeleaf then parses our
+   *         html file, and replaces the corrasponding variables. We can also do
+   *         this with a jsp file instead og an htm file. That gives us more toys,
+   *         but I had trouble with Spring serving the file correctly.
+   */
+  @GetMapping(path = "/results")
+  public String getResults(Model model) {
+    // ModelAndView mv = new ModelAndView();
+    model.addAttribute("address", userData.getAddress());
+    model.addAttribute("travelTimeByCar", userData.gettravelTimeByCar());
+    model.addAttribute("travelTimeByWalking", userData.getTravelTimeByWalking());
+    model.addAttribute("mpg", userData.getMpg());
+    model.addAttribute("insurenceRate", userData.getInsurenceRate());
+
+    return "/takeFlight.html";
   }
 }
-
