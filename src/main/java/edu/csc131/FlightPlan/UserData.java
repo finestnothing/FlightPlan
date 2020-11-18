@@ -12,8 +12,10 @@ public class UserData {
     private Integer id;
 
     private String address;
-    private String travelTime;
-
+    private String travelTimeByCar;
+    private String travelTimeByWalking;
+    private double insurenceRate;
+    private double mpg; 
     public Integer getId() {
         return id;
     }
@@ -30,12 +32,36 @@ public class UserData {
         this.address = address;
     }
 
-    public String getTravelTime() {
-        return travelTime;
+    public String gettravelTimeByCar() {
+        return travelTimeByCar;
     }
 
-    public void setTravelTime(String travelTime) {
-        this.travelTime = travelTime;
+    public void settravelTimeByCar(String travelTimeByCar) {
+        this.travelTimeByCar = travelTimeByCar;
+    }
+
+    public double getInsurenceRate() {
+        return insurenceRate;
+    }
+
+    public void setInsurenceRate(double insurenceRate) {
+        this.insurenceRate = insurenceRate;
+    }
+
+    public double getMpg() {
+        return mpg;
+    }
+
+    public void setMpg(double mpg) {
+        this.mpg = mpg;
+    }
+
+    public String getTravelTimeByWalking() {
+        return travelTimeByWalking;
+    }
+
+    public void setTravelTimeByWalking(String travelTimeByWalking) {
+        this.travelTimeByWalking = travelTimeByWalking;
     }
     
 }
