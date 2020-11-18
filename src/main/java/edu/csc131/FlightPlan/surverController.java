@@ -57,6 +57,9 @@ public class surverController {
     //TODO add transportation travel tiem
     //TODO add bicycle travel time
 
+    //TODO Add the Ranking here
+    //TODO Save the ranking to userData + add UserData fields. Save results? Maybe. 
+
     userData.setAddress(address);
     userData.settravelTimeByCar(travelTimeByCar);
     userData.setTravelTimeByWalking(travelTimeByWalk);
@@ -88,7 +91,7 @@ public class surverController {
     model.addAttribute("travelTimeByWalking", userData.getTravelTimeByWalking());
     model.addAttribute("mpg", userData.getMpg());
     model.addAttribute("insurenceRate", userData.getInsurenceRate());
-
+    //TODO add Ranking results to the model
     return "/takeFlight.html";
   }
 }
