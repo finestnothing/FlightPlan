@@ -60,6 +60,34 @@ public class surverController {
     //TODO Add the Ranking here
     //TODO Save the ranking to userData + add UserData fields. Save results? Maybe. 
 
+     
+    //Hard-coded input
+         double walking_d = 11; 
+         double walking_t = 10; 
+        
+         double biking_d = 9; 
+         double biking_t = 8;
+         
+         double public_d = 7; 
+         double public_t = 8; 
+         
+         double driving_d = 9; 
+         double driving_t = 10;
+
+         String carType = "Sedan";
+   
+      //Creates Ranking object
+         Ranking r = new Ranking(walking_d, walking_t, biking_d, biking_t, public_d, public_t, driving_d, driving_t, carType);
+         
+      /* NOTE:
+      Array itself is not sorted so Alec can tag them and rank them as he said in the meeting
+      Below: Sample Ranking Output based on arbitary scores Justin created in TransportMode.java:
+         
+      double[] ranked_by_whatever = r.rank_all();
+         for (double each : ranked_by_whatever)
+            System.out.println(each);
+      */ 
+      
     userData.setAddress(address);
     userData.settravelTimeByCar(travelTimeByCar);
     userData.setTravelTimeByWalking(travelTimeByWalk);
