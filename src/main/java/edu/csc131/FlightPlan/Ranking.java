@@ -1,3 +1,4 @@
+package edu.csc131.FlightPlan;
 /**
  * Creates and ranks a list of transportation modes
  * Pass me walking distance, walking time, biking distance, biking time, transit distance, transit time, driving distance, driving time, vehicle type

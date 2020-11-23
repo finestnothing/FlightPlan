@@ -1,3 +1,4 @@
+package edu.csc131.FlightPlan;
 /**
  * Stores values of each mode of transportation
  * No setters, so pass all values at declaration (although easily modifiable)

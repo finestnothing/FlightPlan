@@ -1,3 +1,4 @@
+package edu.csc131.FlightPlan;
 /**
  * Calculates the total cost/carbon emission of a trip for given transportation mode
  * Should read and store cost/carbon for mile for each mode
