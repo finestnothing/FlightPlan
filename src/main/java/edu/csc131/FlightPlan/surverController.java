@@ -34,8 +34,7 @@ public class surverController {
    * @return Forward to Get mapped function.
    */
   @PostMapping(path = "/takeFlight") // Map ONLY POST Requests
-  public String saveData(@RequestParam String address, @RequestParam double mpg,
-      @RequestParam("insRate") double insurenceRate) {
+  public String saveData(@RequestParam String address) {
     // @RequestParam means it is a parameter from the GET or POST request. Here we
     // are using POST.
 
@@ -51,33 +50,27 @@ public class surverController {
       return "/invalidAddress";
     }
     // Get times
-    String travelTimeByCar = time.getTimeByCar();
-    String travelTimeByWalk = time.getTimeByWalking();
+    double travelTimeByCar = Double.parseDouble(time.getTimeByCar());
+    double travelTimeByWalk = Double.parseDouble(time.getTimeByWalking());
+    double travelTimeByTransit = Double.parseDouble(time.getTimeByTransportation());
+    double travelTimeByBike = Double.parseDouble(time.getTimeByBike());
 
-    //TODO add transportation travel tiem
-    //TODO add bicycle travel time
-
-    //TODO Add the Ranking here
-    //TODO Save the ranking to userData + add UserData fields. Save results? Maybe. 
+    //Get Distance
+    double travelDistanceByCar = Double.parseDouble(time.getDistanceByCar());
+    double travelDistanceByWalking = Double.parseDouble(time.getDistanceByWalking());
+    double travelDistanceByTransit = Double.parseDouble(time.getDistanceByTransportation());
+    double travelDistanceByBike = Double.parseDouble(time.getDistanceByBike()); 
 
      
     //Hard-coded input
-         double walking_d = 11; 
-         double walking_t = 10; 
-        
-         double biking_d = 9; 
-         double biking_t = 8;
-         
-         double public_d = 7; 
-         double public_t = 8; 
-         
-         double driving_d = 9; 
-         double driving_t = 10;
 
          String carType = "Sedan";
+         String preferredRank = "cost";
    
       //Creates Ranking object
-         Ranking r = new Ranking(walking_d, walking_t, biking_d, biking_t, public_d, public_t, driving_d, driving_t, carType);
+         Ranking r = new Ranking(travelDistanceByWalking, travelTimeByWalk, travelDistanceByBike, travelDistanceByBike,
+                                 travelDistanceByTransit, travelTimeByTransit, travelDistanceByCar, travelTimeByCar, carType);
+         
          
       /* NOTE:
       Array itself is not sorted so Alec can tag them and rank them as he said in the meeting
@@ -89,10 +82,21 @@ public class surverController {
       */ 
       
     userData.setAddress(address);
+    userData.setPreferredRank(preferredRank);
+
     userData.settravelTimeByCar(travelTimeByCar);
     userData.setTravelTimeByWalking(travelTimeByWalk);
-    userData.setInsurenceRate(insurenceRate);
-    userData.setMpg(mpg);
+    userData.setTravelTimeByTransit(travelTimeByTransit);
+    userData.setTravelTimeByBike(travelTimeByBike);
+
+    userData.setTravelDistanceByCar(travelDistanceByCar);
+    userData.setTravelDistanceByWalking(travelDistanceByWalking);
+    userData.setTravelDistanceByTransit(travelDistanceByTransit);
+    userData.setTravelDistanceByBike(travelDistanceByBike);
+
+    userData.setRankCarbon(r.rank_carbon());
+    userData.setRankCost(r.rank_cost());
+    userData.setRankTime(r.rank_time());
 
     // adds the row to the database.
     dataRepo.save(userData);
@@ -115,11 +119,23 @@ public class surverController {
   public String getResults(Model model) {
     // ModelAndView mv = new ModelAndView();
     model.addAttribute("address", userData.getAddress());
+
     model.addAttribute("travelTimeByCar", userData.gettravelTimeByCar());
     model.addAttribute("travelTimeByWalking", userData.getTravelTimeByWalking());
-    model.addAttribute("mpg", userData.getMpg());
-    model.addAttribute("insurenceRate", userData.getInsurenceRate());
-    //TODO add Ranking results to the model
-    return "/takeFlight.html";
+    model.addAttribute("travelTimeByTransit", userData.getTravelTimeByTransit());
+    model.addAttribute("travelTimeBybike", userData.getTravelTimeByBike());
+
+    model.addAttribute("travelDistanceByCar", userData.getTravelDistanceByCar());
+    model.addAttribute("travelDistanceByWalking", userData.getTravelDistanceByWalking());
+    model.addAttribute("travelDistanceByTransit", userData.getTravelDistanceByTransit());
+    model.addAttribute("travelDistanceBybike", userData.getTravelDistanceByBike());
+
+    model.addAttribute("rankTime", userData.getRankTime());
+    model.addAttribute("rankCarbon", userData.getRankCarbon());
+    model.addAttribute("rankCost", userData.getRankCost());
+
+    model.addAttribute("preferredRank", userData.getPreferredRank());
+    
+    return "/takeFlight.html"; 
   }
 }

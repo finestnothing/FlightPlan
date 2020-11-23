@@ -60,8 +60,38 @@
                     <p>Address: <span th:text="${address}"></span></p>
                     <p>Travel Time: <span th:text="${travelTimeByCar}"></span></p>
                     <p>Travel Time Walking: <span th:text="${travelTimeByWalking}"></span></p>
-                    <p>MPG: <span th:text="${mpg}"></span></p>
-                    <p>Insurance Rate: <span th:text="${insurenceRate}"></span></p>
+                    <p>Travel Time by Transit: <span th:text="${travelTimeByTransit}"></span></p>
+                    <p>Travel Time by Bike: <span th:text="${travelTimeBybike}"></span></p>
+
+                    <p>Distance car: <span th:text="${travelDistanceByCar}"></span></p>
+                    <p>Distance Walking: <span th:text="${travelDistanceByWalking}"></span></p>
+                    <p>Distance Transit: <span th:text="${travelDistanceByTransit}"></span></p>
+                    <p>Distance Bike: <span th:text="${travelDistanceBybike}"></span></p>
+
+                    <p>Rank1 for time <span th:text="${rankTime[0]}"></span></p>
+                    <p>Rank2 for time <span th:text="${rankTime[1]}"></span></p>
+                    <p>Rank3 for time <span th:text="${rankTime[2]}"></span></p>
+
+                    <p>Ranks for carbon, but a diffrent way for example</p>
+                    <ul th:each="rankCarbon : ${rankCarbon}">
+                        <li th:text="${rankCarbon}"></li>
+                    </ul>
+
+                    <h3>Anyway you get it... Check out the script below for more examples!</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 </div>
                 <div class="rankedOption" id="carpoolOption">
                     <img src="../Images/SacState_Carpool.jpg" alt="Carpool">
@@ -100,6 +130,7 @@
             var travelTimeByCar = /*[[${travelTimeByCar}]]*/ "60 min"; 
             var address = /*[[${mpg}]]*/ "12.3"; 
             var address = /*[[${insurenceRate}]]*/ "80"; 
+            var rankTime = /*[[${rankTime}]]*/ "ERROR";
         </script>
     </body>
 </html>

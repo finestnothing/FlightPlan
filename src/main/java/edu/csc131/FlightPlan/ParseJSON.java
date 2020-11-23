@@ -43,14 +43,31 @@ public class ParseJSON {
         String travelTime;
         JSONObject obj = arr.getJSONObject(0);
         if(obj.getJSONArray("elements").getJSONObject(0).get("status").toString().equalsIgnoreCase("ok")){
-          travelTime = obj.getJSONArray("elements").getJSONObject(0).getJSONObject("duration").get("humanReadable").toString();
+          travelTime = obj.getJSONArray("elements").getJSONObject(0).getJSONObject("duration").get("inSeconds").toString();
+        }else if(obj.getJSONArray("elements").getJSONObject(0).get("status").toString().equalsIgnoreCase("ZERO_RESULTS")){
+          travelTime = "-1";
         }else{
           travelTime = "ERROR";
-          throw new NotValidAddressException("Google API Unable to find address");
-        }
+        throw new NotValidAddressException("Google API Unable to find address");
+      }
 
         System.out.println(travelTime);
         return travelTime;
     }
-;
+    String getDistance(String json) throws NotValidAddressException {
+      JSONArray arr = new JSONArray(json);
+      String distance;
+      JSONObject obj = arr.getJSONObject(0);
+      if(obj.getJSONArray("elements").getJSONObject(0).get("status").toString().equalsIgnoreCase("ok")){
+        distance = obj.getJSONArray("elements").getJSONObject(0).getJSONObject("distance").get("inMeters").toString();
+      }else if(obj.getJSONArray("elements").getJSONObject(0).get("status").toString().equalsIgnoreCase("ZERO_RESULTS")){
+          distance = "-1";
+        }else{
+        distance = "ERROR";
+        throw new NotValidAddressException("Google API Unable to find address");
+      }
+
+      System.out.println(distance);
+      return distance;
+    }
 }
