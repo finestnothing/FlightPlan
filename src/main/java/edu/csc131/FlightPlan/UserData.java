@@ -23,8 +23,11 @@ public class UserData {
     private double travelDistanceByTransit;
     private double travelDistanceByBike;
 
-    private double insurenceRate;//Remove Me
-    private double mpg; //Remove Me
+    private double[] rankCarbon;
+    private double[] rankTime;
+    private double[] rankCost;
+
+
     public Integer getId() {
         return id;
     }
@@ -47,22 +50,6 @@ public class UserData {
 
     public void settravelTimeByCar(double travelTimeByCar) {
         this.travelTimeByCar = travelTimeByCar;
-    }
-
-    public double getInsurenceRate() {
-        return insurenceRate;
-    }
-
-    public void setInsurenceRate(double insurenceRate) {
-        this.insurenceRate = insurenceRate;
-    }
-
-    public double getMpg() {
-        return mpg;
-    }
-
-    public void setMpg(double mpg) {
-        this.mpg = mpg;
     }
 
     public double getTravelTimeByWalking() {
@@ -135,6 +122,30 @@ public class UserData {
 
     public void setTravelDistanceByBike(double travelDistanceByBike) {
         this.travelDistanceByBike = travelDistanceByBike;
+    }
+
+    public double[] getRankCarbon() {
+        return rankCarbon;
+    }
+
+    public void setRankCarbon(double[] rankCarbon) {
+        this.rankCarbon = rankCarbon;
+    }
+
+    public double[] getRankTime() {
+        return rankTime;
+    }
+
+    public void setRankTime(double[] rankTime) {
+        this.rankTime = rankTime;
+    }
+
+    public double[] getRankCost() {
+        return rankCost;
+    }
+
+    public void setRankCost(double[] rankCost) {
+        this.rankCost = rankCost;
     }
     
 }

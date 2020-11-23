@@ -34,8 +34,7 @@ public class surverController {
    * @return Forward to Get mapped function.
    */
   @PostMapping(path = "/takeFlight") // Map ONLY POST Requests
-  public String saveData(@RequestParam String address, @RequestParam double mpg,
-      @RequestParam("insRate") double insurenceRate) {
+  public String saveData(@RequestParam String address) {
     // @RequestParam means it is a parameter from the GET or POST request. Here we
     // are using POST.
 
@@ -62,30 +61,18 @@ public class surverController {
     double travelDistanceByTransit = Double.parseDouble(time.getDistanceByTransportation());
     double travelDistanceByBike = Double.parseDouble(time.getDistanceByBike()); 
 
-    //TODO add transportation travel tiem
-    //TODO add bicycle travel time
-
     //TODO Add the Ranking here
     //TODO Save the ranking to userData + add UserData fields. Save results? Maybe. 
 
      
     //Hard-coded input
-         double walking_d = 11; 
-         double walking_t = 10; 
-        
-         double biking_d = 9; 
-         double biking_t = 8;
-         
-         double public_d = 7; 
-         double public_t = 8; 
-         
-         double driving_d = 9; 
-         double driving_t = 10;
 
          String carType = "Sedan";
    
       //Creates Ranking object
-         Ranking r = new Ranking(walking_d, walking_t, biking_d, biking_t, public_d, public_t, driving_d, driving_t, carType);
+         Ranking r = new Ranking(travelDistanceByWalking, travelTimeByWalk, travelDistanceByBike, travelDistanceByBike,
+                                 travelDistanceByTransit, travelTimeByTransit, travelDistanceByCar, travelTimeByCar, carType);
+         
          
       /* NOTE:
       Array itself is not sorted so Alec can tag them and rank them as he said in the meeting
@@ -107,8 +94,9 @@ public class surverController {
     userData.setTravelDistanceByTransit(travelDistanceByTransit);
     userData.setTravelDistanceByBike(travelDistanceByBike);
 
-    userData.setInsurenceRate(insurenceRate);
-    userData.setMpg(mpg);
+    userData.setRankCarbon(r.rank_carbon());
+    userData.setRankCost(r.rank_cost());
+    userData.setRankTime(r.rank_time());
 
     // adds the row to the database.
     dataRepo.save(userData);
@@ -133,8 +121,7 @@ public class surverController {
     model.addAttribute("address", userData.getAddress());
     model.addAttribute("travelTimeByCar", userData.gettravelTimeByCar());
     model.addAttribute("travelTimeByWalking", userData.getTravelTimeByWalking());
-    model.addAttribute("mpg", userData.getMpg());
-    model.addAttribute("insurenceRate", userData.getInsurenceRate());
+
     //TODO add Ranking results to the model
     return "/takeFlight.html";
   }
