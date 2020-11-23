@@ -61,13 +61,11 @@ public class surverController {
     double travelDistanceByTransit = Double.parseDouble(time.getDistanceByTransportation());
     double travelDistanceByBike = Double.parseDouble(time.getDistanceByBike()); 
 
-    //TODO Add the Ranking here
-    //TODO Save the ranking to userData + add UserData fields. Save results? Maybe. 
-
      
     //Hard-coded input
 
          String carType = "Sedan";
+         String preferredRank = "cost";
    
       //Creates Ranking object
          Ranking r = new Ranking(travelDistanceByWalking, travelTimeByWalk, travelDistanceByBike, travelDistanceByBike,
@@ -84,6 +82,8 @@ public class surverController {
       */ 
       
     userData.setAddress(address);
+    userData.setPreferredRank(preferredRank);
+
     userData.settravelTimeByCar(travelTimeByCar);
     userData.setTravelTimeByWalking(travelTimeByWalk);
     userData.setTravelTimeByTransit(travelTimeByTransit);
@@ -119,10 +119,23 @@ public class surverController {
   public String getResults(Model model) {
     // ModelAndView mv = new ModelAndView();
     model.addAttribute("address", userData.getAddress());
+
     model.addAttribute("travelTimeByCar", userData.gettravelTimeByCar());
     model.addAttribute("travelTimeByWalking", userData.getTravelTimeByWalking());
+    model.addAttribute("travelTimeByTransit", userData.getTravelTimeByTransit());
+    model.addAttribute("travelTimeBybike", userData.getTravelTimeByBike());
 
-    //TODO add Ranking results to the model
-    return "/takeFlight.html";
+    model.addAttribute("travelDistanceByCar", userData.getTravelDistanceByCar());
+    model.addAttribute("travelDistanceByWalking", userData.getTravelDistanceByWalking());
+    model.addAttribute("travelDistanceByTransit", userData.getTravelDistanceByTransit());
+    model.addAttribute("travelDistanceBybike", userData.getTravelDistanceByBike());
+
+    model.addAttribute("rankTime", userData.getRankTime());
+    model.addAttribute("rankCarbon", userData.getRankCarbon());
+    model.addAttribute("rankCost", userData.getRankCost());
+
+    model.addAttribute("preferredRank", userData.getPreferredRank());
+    
+    return "/takeFlight.html"; 
   }
 }

@@ -13,6 +13,7 @@ public class UserData {
 
     private String address;//remove Me After Testing
     private String carType;
+    private String preferredRank;
     private double travelTimeByCar;
     private double travelTimeByWalking;
     private double travelTimeByTransit;
@@ -146,6 +147,14 @@ public class UserData {
 
     public void setRankCost(double[] rankCost) {
         this.rankCost = rankCost;
+    }
+
+    public String getPreferredRank() {
+        return preferredRank;
+    }
+
+    public void setPreferredRank(String preferredRank) {
+        this.preferredRank = preferredRank;
     }
     
 }
