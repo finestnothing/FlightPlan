@@ -5,7 +5,8 @@
     <head>
         <title>Flight Plan</title>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="Style/style.css" >
+        <link rel="stylesheet" href="Style/style.css">
+        <link rel="stylesheet" href="Style/mystyle.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
@@ -31,9 +32,11 @@
 
         <div class="modal" id="theSurvey">
             <div id="survey-title">
+            	
                 <div class="close-button" id="close-button">
-                    <img src="Images/close.png"  alt="Close Icon by Vaadin Icons"  ><!--Want to make our own.-->
+                    <!--<img src="Images/close.png"  alt="Close Icon by Vaadin Icons">-->
                 </div>
+
             </div>
         
             <div class="modal-guts">
@@ -43,14 +46,15 @@
                     <ul id="progressbar">
                            <li class="active">Address</li>
                            <li>	MPG</li>
-                           <li>Insurence Rate</li>
+                           <li>Insurance</li>
                     </ul>
                     <!-- fieldsets -->
                     <fieldset>
                         <h2 class="fs-title">Your Address</h2>
-                        <h3 class="fs-subtitle">This is step 1</h3>
+                        <h3 class="fs-subtitle">Please Enter Your Starting Location</h3>
                         <input type="text" id="address" name="address"placeholder="Lodi,CA?">
-                <input type="button" name="next" class="next action-button" value="Next" />
+                        <input type="button" name="exit" id="exit-button" class="exit-button" value="Cancel" />
+                		<input type="button" name="next" class="next action-button" value="Next" />
                     </fieldset>
                     <fieldset>
                         <h2 class="fs-title">MPG</h2>
@@ -61,7 +65,7 @@
                         <input type="button" name="next" class="next action-button" value="Next" />
                     </fieldset>
                 <fieldset>
-                        <h2 class="fs-title">Insurence Rate</h2>
+                        <h2 class="fs-title">Insurance Rate</h2>
                         <h3 class="fs-subtitle">Please estimate your monthly insurance dues.</h3>
                         <input type="number" id="insRate" name="insRate" placeholder="50.00" step="any">
                   </br>

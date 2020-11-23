@@ -13,6 +13,12 @@ surveyStart.addEventListener("click", function(){
     modalOverlay.classList.toggle("closed");
 });
 
+//Exit Survey Button
+var exitButton = document.querySelector("#exit-button");
+exitButton.addEventListener("click", function(){
+    theSurvey.classList.toggle("closed");
+    modalOverlay.classList.toggle("closed");
+});
 
 
 
