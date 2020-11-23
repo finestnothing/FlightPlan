@@ -51,8 +51,16 @@ public class surverController {
       return "/invalidAddress";
     }
     // Get times
-    String travelTimeByCar = time.getTimeByCar();
-    String travelTimeByWalk = time.getTimeByWalking();
+    double travelTimeByCar = Double.parseDouble(time.getTimeByCar());
+    double travelTimeByWalk = Double.parseDouble(time.getTimeByWalking());
+    double travelTimeByTransit = Double.parseDouble(time.getTimeByTransportation());
+    double travelTimeByBike = Double.parseDouble(time.getTimeByBike());
+
+    //Get Distance
+    double travelDistanceByCar = Double.parseDouble(time.getDistanceByCar());
+    double travelDistanceByWalking = Double.parseDouble(time.getDistanceByWalking());
+    double travelDistanceByTransit = Double.parseDouble(time.getDistanceByTransportation());
+    double travelDistanceByBike = Double.parseDouble(time.getDistanceByBike()); 
 
     //TODO add transportation travel tiem
     //TODO add bicycle travel time
@@ -91,6 +99,14 @@ public class surverController {
     userData.setAddress(address);
     userData.settravelTimeByCar(travelTimeByCar);
     userData.setTravelTimeByWalking(travelTimeByWalk);
+    userData.setTravelTimeByTransit(travelTimeByTransit);
+    userData.setTravelTimeByBike(travelTimeByBike);
+
+    userData.setTravelDistanceByCar(travelDistanceByCar);
+    userData.setTravelDistanceByWalking(travelDistanceByWalking);
+    userData.setTravelDistanceByTransit(travelDistanceByTransit);
+    userData.setTravelDistanceByBike(travelDistanceByBike);
+
     userData.setInsurenceRate(insurenceRate);
     userData.setMpg(mpg);
 

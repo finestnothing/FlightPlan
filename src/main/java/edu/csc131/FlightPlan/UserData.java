@@ -11,11 +11,20 @@ public class UserData {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
 
-    private String address;
-    private String travelTimeByCar;
-    private String travelTimeByWalking;
-    private double insurenceRate;
-    private double mpg; 
+    private String address;//remove Me After Testing
+    private String carType;
+    private double travelTimeByCar;
+    private double travelTimeByWalking;
+    private double travelTimeByTransit;
+    private double travelTimeByBike;
+
+    private double travelDistanceByCar;
+    private double travelDistanceByWalking;
+    private double travelDistanceByTransit;
+    private double travelDistanceByBike;
+
+    private double insurenceRate;//Remove Me
+    private double mpg; //Remove Me
     public Integer getId() {
         return id;
     }
@@ -32,11 +41,11 @@ public class UserData {
         this.address = address;
     }
 
-    public String gettravelTimeByCar() {
+    public double gettravelTimeByCar() {
         return travelTimeByCar;
     }
 
-    public void settravelTimeByCar(String travelTimeByCar) {
+    public void settravelTimeByCar(double travelTimeByCar) {
         this.travelTimeByCar = travelTimeByCar;
     }
 
@@ -56,12 +65,76 @@ public class UserData {
         this.mpg = mpg;
     }
 
-    public String getTravelTimeByWalking() {
+    public double getTravelTimeByWalking() {
         return travelTimeByWalking;
     }
 
-    public void setTravelTimeByWalking(String travelTimeByWalking) {
+    public void setTravelTimeByWalking(double travelTimeByWalking) {
         this.travelTimeByWalking = travelTimeByWalking;
+    }
+
+    public String getCarType() {
+        return carType;
+    }
+
+    public void setCarType(String carType) {
+        this.carType = carType;
+    }
+
+    public double getTravelTimeByCar() {
+        return travelTimeByCar;
+    }
+
+    public void setTravelTimeByCar(double travelTimeByCar) {
+        this.travelTimeByCar = travelTimeByCar;
+    }
+
+    public double getTravelTimeByTransit() {
+        return travelTimeByTransit;
+    }
+
+    public void setTravelTimeByTransit(double travelTimeByTransit) {
+        this.travelTimeByTransit = travelTimeByTransit;
+    }
+
+    public double getTravelTimeByBike() {
+        return travelTimeByBike;
+    }
+
+    public void setTravelTimeByBike(double travelTimeByBike) {
+        this.travelTimeByBike = travelTimeByBike;
+    }
+
+    public double getTravelDistanceByCar() {
+        return travelDistanceByCar;
+    }
+
+    public void setTravelDistanceByCar(double travelDistanceByCar) {
+        this.travelDistanceByCar = travelDistanceByCar;
+    }
+
+    public double getTravelDistanceByWalking() {
+        return travelDistanceByWalking;
+    }
+
+    public void setTravelDistanceByWalking(double travelDistanceByWalking) {
+        this.travelDistanceByWalking = travelDistanceByWalking;
+    }
+
+    public double getTravelDistanceByTransit() {
+        return travelDistanceByTransit;
+    }
+
+    public void setTravelDistanceByTransit(double travelDistanceByTransit) {
+        this.travelDistanceByTransit = travelDistanceByTransit;
+    }
+
+    public double getTravelDistanceByBike() {
+        return travelDistanceByBike;
+    }
+
+    public void setTravelDistanceByBike(double travelDistanceByBike) {
+        this.travelDistanceByBike = travelDistanceByBike;
     }
     
 }
