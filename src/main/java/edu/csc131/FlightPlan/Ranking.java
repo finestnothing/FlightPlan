@@ -20,6 +20,12 @@ class Ranking{
     * @param driving vehicle type
     */
    Ranking(double walking_d, double walking_t, double biking_d, double biking_t, double public_d, double public_t, double driving_d, double driving_t, String carType) {
+      //Convert meter to mile
+      walking_d = walking_d*c.MeterToMile();
+      biking_d = biking_d*c.MeterToMile();
+      public_d = public_d*c.MeterToMile();
+      driving_d = driving_d*c.MeterToMile();
+
       modes[0] = new TransportMode(c.getCarC02(driving_d, carType), c.getCarCost(driving_d, carType), driving_d, driving_t, "Car");
       modes[1] = new TransportMode(c.getTransitC02(public_d), c.getTransitCost(public_d), public_d, public_t, "Transit");
       modes[2] = new TransportMode(c.getBikeC02(biking_d), c.getBikeCost(biking_d), biking_d, biking_t, "Bike");
@@ -80,5 +86,20 @@ class Ranking{
       for (int i = 0; i < modes.length; i++)
          rank[i] = modes[i].getScore();
       return rank;
+   }
+
+   String[] hours_minutes() {
+      String[] time = new String[modes.length];
+         for(int i = 0; i < modes.length; i++) {
+            int hours = (int) modes[i].getTime() / 3600;
+            int minutes = (int) modes[i].getTime()/60 % 60;
+            if (hours == 0)
+               time[i] = minutes + " min";
+            else if (hours == 1)
+               time[i] = "1 hr " + minutes + " min";
+            else
+               time[i] = hours + " hr " + minutes + " min";
+         }
+      return time;
    }
 }

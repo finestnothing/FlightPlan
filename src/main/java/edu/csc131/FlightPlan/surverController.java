@@ -97,6 +97,8 @@ public class surverController {
     userData.setRankCost(r.rank_cost());
     userData.setRankTime(r.rank_time());
 
+    userData.setTimeHoursMinutes(r.hours_minutes());
+
     // adds the row to the database.
     dataRepo.save(userData);
 
