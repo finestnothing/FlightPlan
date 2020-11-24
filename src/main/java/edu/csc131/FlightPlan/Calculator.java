@@ -26,6 +26,8 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
    //Walk
    private double walk_cost_per_mile=0.3264;
    private double walk_c02_per_mile=0.0926;
+
+   private double km_to_miles=0.62137119;
    
    /**
     * Calculate cost of total trip by vehicle type.
@@ -123,4 +125,9 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
    double getWalkC02(double distance) {
       return walk_c02_per_mile*distance;
    }
+
+   double getKMToMiles() {
+      return km_to_miles;
+   }
+   
 }
