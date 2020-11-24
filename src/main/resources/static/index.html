@@ -45,7 +45,7 @@
                     <!-- progressbar -->
                     <ul id="progressbar">
                            <li class="active">Address</li>
-                           <li>	MPG</li>
+                           <li>Ranking Preference</li>
                            <li>Insurance</li>
                     </ul>
                     <!-- fieldsets -->
@@ -57,9 +57,13 @@
                 		<input type="button" name="next" class="next action-button" value="Next" />
                     </fieldset>
                     <fieldset>
-                        <h2 class="fs-title">MPG</h2>
-                        <h3 class="fs-subtitle">Please estimate your MPG.</h3>
-                        <input type="number" id="mpg" name="mpg" placeholder="MPG" step="any">
+                        <h2 class="fs-title">Ranking Preference</h2>
+                        <h3 class="fs-subtitle">Please choose how you would like the results ranked</h3>
+                        <select id="rank" name="rank" > 
+                            <option value="cost">cost</option>
+                            <option value="carbon">carbon</option>
+                            <option value="time">time</option>
+                          </select>
                   </br>
                         <input type="button" name="previous" class="previous action-button" value="Previous" />
                         <input type="button" name="next" class="next action-button" value="Next" />
