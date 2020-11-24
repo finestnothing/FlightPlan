@@ -34,7 +34,7 @@ public class surverController {
    * @return Forward to Get mapped function.
    */
   @PostMapping(path = "/takeFlight") // Map ONLY POST Requests
-  public String saveData(@RequestParam String address) {
+  public String saveData(@RequestParam String address, @RequestParam("rank") String preferredRank) {
     // @RequestParam means it is a parameter from the GET or POST request. Here we
     // are using POST.
 
@@ -65,7 +65,6 @@ public class surverController {
     //Hard-coded input
 
          String carType = "Sedan";
-         String preferredRank = "cost";
    
       //Creates Ranking object
          Ranking r = new Ranking(travelDistanceByWalking, travelTimeByWalk, travelDistanceByBike, travelDistanceByBike,
