@@ -52,6 +52,9 @@ html{
     scrollbar-width: none;  /* Firefox */
 }
 
+body{
+    padding-bottom: 500px;
+}
 /* Header Bar with logo and menu */
 .headerBar{
     width: 100%;
@@ -201,10 +204,6 @@ img.headerButton:hover{
 
 .rankedOption img{
     width: 30%;
-}
-
-#walkOption{
-    margin-bottom: 500px;
 }
 
 .returnSurvey{

@@ -90,11 +90,12 @@
             </div>
             <div class="rankedOption" id="walkOption"
                 th:attr="data-number=${preferredRank == 'cost'} ? ${rankCost[3]} : (${preferredRank == 'carbon'} ? ${rankCarbon[3]} : ${rankTime[3]})">
-            </div>>
-            <img src="../Images/SacState_Vehicle.jpg" alt="Walking">
-            <p class="vType">Walking</p>
-            <p>Time Walking: <span th:text="${travelTimeByWalking}"></span></p>
-            <p>Distance Walking: <span th:text="${travelDistanceByWalking}"></span></p>
+                <img src="../Images/SacState_Vehicle.jpg" alt="Walking">
+                <p class="vType">Walking</p>
+                <p>Time Walking: <span th:text="${travelTimeByWalking}"></span></p>
+                <p>Distance Walking: <span th:text="${travelDistanceByWalking}"></span></p>
+            </div>
+            
         </div>
 
     </div>
