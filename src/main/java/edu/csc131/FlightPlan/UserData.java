@@ -28,8 +28,6 @@ public class UserData {
     private double[] rankTime;
     private double[] rankCost;
 
-    private String[] timeHoursMinutes;
-
 
     public Integer getId() {
         return id;
@@ -157,14 +155,6 @@ public class UserData {
 
     public void setPreferredRank(String preferredRank) {
         this.preferredRank = preferredRank;
-    }
-
-    public void setTimeHoursMinutes(String[] hoursMinutes) {
-        this.timeHoursMinutes = hoursMinutes;
-    }
-
-    public String[] getTimeHoursMinutes() {
-        return timeHoursMinutes;
     }
     
 }

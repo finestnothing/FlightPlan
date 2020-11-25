@@ -63,7 +63,7 @@
                 <img src="../Images/SacState_Vehicle.jpg" alt="Car">
                 <p class="vType">Single-Occupant Car</p>
                 <!--Some template testing. This is how you can add the response to the html text. How to use with js is below-->
-                <p>Car Travel Time: <span th:text="${timeHoursMinutes[0]}"></span></p>
+                <p>Car Travel Time: <span th:text="${travelTimeByCar}"></span></p>
                 <p>Distance car: <span th:text="${travelDistanceByCar}"></span></p>
             </div>
             <div class="rankedOption" id="carpoolOption" data-number="999991.0">
@@ -74,7 +74,7 @@
                 th:attr="data-number=${preferredRank == 'cost'} ? ${rankCost[1]} : (${preferredRank == 'carbon'} ? ${rankCarbon[1]} : ${rankTime[1]})">
                 <img src="../Images/SacState_Vehicle.jpg" alt="Bus">
                 <p class="vType">Bus</p>
-                <p>Travel Time Bus: <span th:text="${timeHoursMinutes[1]}"></span></p>
+                <p>Travel Time Bus: <span th:text="${travelTimeByTransit}"></span></p>
                 <p>Distance Bus: <span th:text="${travelDistanceByTransit}"></span></p>
             </div>
             <div class="rankedOption" id="shuttleOption" data-number="999991.0">
@@ -85,14 +85,14 @@
                 th:attr="data-number=${preferredRank == 'cost'} ? ${rankCost[2]} : (${preferredRank == 'carbon'} ? ${rankCarbon[2]} : ${rankTime[2]})">
                 <img src="../Images/SacState_WalkBike.jpg" alt="Biking">
                 <p class="vType">Biking</p>
-                <p>Travel Time Bike: <span th:text="${timeHoursMinutes[2]}"></span></p>
+                <p>Travel Time Bike: <span th:text="${travelTimeBybike}"></span></p>
                 <p>Distance Bike: <span th:text="${travelDistanceBybike}"></span></p>
             </div>
             <div class="rankedOption" id="walkOption"
                 th:attr="data-number=${preferredRank == 'cost'} ? ${rankCost[3]} : (${preferredRank == 'carbon'} ? ${rankCarbon[3]} : ${rankTime[3]})">
                 <img src="../Images/SacState_Vehicle.jpg" alt="Walking">
                 <p class="vType">Walking</p>
-                <p>Time Walking: <span th:text="${timeHoursMinutes[3]}"></span></p>
+                <p>Time Walking: <span th:text="${travelTimeByWalking}"></span></p>
                 <p>Distance Walking: <span th:text="${travelDistanceByWalking}"></span></p>
             </div>
             
