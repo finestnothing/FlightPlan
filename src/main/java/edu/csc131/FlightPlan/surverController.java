@@ -34,7 +34,7 @@ public class surverController {
    * @return Forward to Get mapped function.
    */
   @PostMapping(path = "/takeFlight") // Map ONLY POST Requests
-  public String saveData(@RequestParam String address) {
+  public String saveData(@RequestParam String address, @RequestParam("rank") String preferredRank) {
     // @RequestParam means it is a parameter from the GET or POST request. Here we
     // are using POST.
 
@@ -59,13 +59,11 @@ public class surverController {
     double travelDistanceByCar = Double.parseDouble(time.getDistanceByCar());
     double travelDistanceByWalking = Double.parseDouble(time.getDistanceByWalking());
     double travelDistanceByTransit = Double.parseDouble(time.getDistanceByTransportation());
-    double travelDistanceByBike = Double.parseDouble(time.getDistanceByBike()); 
+    double travelDistanceByBike = Double.parseDouble(time.getDistanceByBike());
 
-     
     //Hard-coded input
 
          String carType = "Sedan";
-         String preferredRank = "cost";
    
       //Creates Ranking object
          Ranking r = new Ranking(travelDistanceByWalking, travelTimeByWalk, travelDistanceByBike, travelDistanceByBike,
@@ -133,6 +131,17 @@ public class surverController {
     model.addAttribute("rankTime", userData.getRankTime());
     model.addAttribute("rankCarbon", userData.getRankCarbon());
     model.addAttribute("rankCost", userData.getRankCost());
+
+    FormatOutput format = new FormatOutput();
+    model.addAttribute("travelTimeByCarString", format.getTimeFormatted(userData.gettravelTimeByCar()));
+    model.addAttribute("travelTimeByTransitString", format.getTimeFormatted(userData.getTravelTimeByTransit()));
+    model.addAttribute("travelTimeByBikeString", format.getTimeFormatted(userData.getTravelTimeByBike()));
+    model.addAttribute("travelTimeByWalkingString", format.getTimeFormatted(userData.getTravelTimeByWalking()));
+
+    model.addAttribute("travelDistanceByCarFormatted", format.getMetersToMiles(userData.getTravelDistanceByCar()));
+    model.addAttribute("travelDistanceByTransitFormatted", format.getMetersToMiles(userData.getTravelDistanceByTransit()));
+    model.addAttribute("travelDistanceByBikeFormatted", format.getMetersToMiles(userData.getTravelDistanceByBike()));
+    model.addAttribute("travelDistanceByWalkingFormatted", format.getMetersToMiles(userData.getTravelDistanceByWalking()));
 
     model.addAttribute("preferredRank", userData.getPreferredRank());
     

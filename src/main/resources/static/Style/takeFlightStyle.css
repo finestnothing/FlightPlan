@@ -52,6 +52,9 @@ html{
     scrollbar-width: none;  /* Firefox */
 }
 
+body{
+    padding-bottom: 500px;
+}
 /* Header Bar with logo and menu */
 .headerBar{
     width: 100%;
@@ -138,7 +141,7 @@ img.headerButton:hover{
     font-size: 1vw;
     padding-top: 10px;
     padding-bottom: 10px;
-    transition: 0.5s;
+    transition: 0.05s;
     height: 10%;
 }
 
@@ -155,7 +158,7 @@ img.headerButton:hover{
     border: 1px solid black;
     background-color: rgba(0, 78, 56, 0.7);
     transition-property: background-color;
-    transition: 1s;
+    transition: .5s;
     margin: 0px auto;
     padding: inherit;
     height: inherit;
@@ -201,10 +204,6 @@ img.headerButton:hover{
 
 .rankedOption img{
     width: 30%;
-}
-
-#walkOption{
-    margin-bottom: 500px;
 }
 
 .returnSurvey{

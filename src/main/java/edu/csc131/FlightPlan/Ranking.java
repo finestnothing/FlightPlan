@@ -1,4 +1,5 @@
 package edu.csc131.FlightPlan;
+
 /**
  * Creates and ranks a list of transportation modes
  * Pass me walking distance, walking time, biking distance, biking time, transit distance, transit time, driving distance, driving time, vehicle type
@@ -48,7 +49,7 @@ class Ranking{
    /**
     * @return double[] of carbon score in order (car, transit, bike, walk)
     */
-   double[] rank_carbon() {
+   public double[] rank_carbon() {
       double[] rank = new double[modes.length];
       for (int i = 0; i < modes.length; i++)
          rank[i] = modes[i].getC02();
@@ -57,7 +58,7 @@ class Ranking{
    /**
     * @return double[] of cost in order (car, transit, bike, walk)
     */
-   double[] rank_cost() {
+   public double[] rank_cost() {
       double[] rank = new double[modes.length];
       for (int i = 0; i < modes.length; i++)
          rank[i] = modes[i].getCost();
@@ -66,7 +67,7 @@ class Ranking{
    /**
     * @return double[] of time in order (car, transit, bike, walk)
     */
-   double[] rank_time() {
+   public double[] rank_time() {
       double[] rank = new double[modes.length];
       for (int i = 0; i < modes.length; i++)
          rank[i] = modes[i].getTime();
@@ -75,10 +76,13 @@ class Ranking{
    /**
     * @return double[] of total score in order (car, transit, bike, walk)
     */
-   double[] rank_all() {
+   public double[] rank_all() {
       double[] rank = new double[modes.length];
       for (int i = 0; i < modes.length; i++)
          rank[i] = modes[i].getScore();
       return rank;
+   }
+   TransportMode[] getTransportModes() {
+      return modes;
    }
 }

@@ -16,7 +16,6 @@ import com.google.maps.model.Unit;
 public class TimeTo {
     private String APIKEY = "AIzaSyCBpItlEi0pNJV5BJnarqUdQERjmK2t4JM"; //I own this key. It will be deactivated before the project is released to client.
     private GeoApiContext context;
-    private String fromAddress;
     private String[] orgins;
     private String[] destinations;
     //Travel Times
@@ -40,7 +39,6 @@ public class TimeTo {
      * @throws NotValidAddressException
      */
     public TimeTo(String fromAddress) throws NotValidAddressException {
-        this.fromAddress = fromAddress;
         context = new GeoApiContext.Builder()
         .apiKey(APIKEY)
         .build();

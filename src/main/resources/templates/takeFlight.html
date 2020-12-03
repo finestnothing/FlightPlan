@@ -1,136 +1,142 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>Take Flight ${foo}</title>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="../Style/takeFlightStyle.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
-        
-        </style>
-    </head>
-    <body id="bodyId">
-        <div id="bodyWrapper">
 
-            <!-- Header --> 
-            <div class="headerBar">
-                <a href = "https://www.csus.edu/"><img class="headerButton" alt="Sac State logo" src="https://www.csus.edu/NewCSUS2019-global-assets/_internal/images/logo-horizontal.png"></a>
-                <div class="buttonGroup">
-                    <a href = "https://www.csus.edu/apply/" class="headerButton">APPLY</a>
-                    <a href = "https://www.csus.edu/experience/" class="headerButton">EXPERIENCE</a>
-                    <a href = "https://www.csus.edu/campaign/" class="headerButton">GIVE</a>
-                </div>
-            </div>
-            <div class="close-button">
-                <img src="../Images/close.png"  alt="Close Icon by Vaadin Icons"  ><!--Want to make our own.-->
-            </div>
-            <span class="topPrompt">Ranked Option.<br>Click on an option or scroll for more information.</span>
-            <div class="rankBar" id="rankBar1" onClick="changeHeight()">
-                <div class="rankButton" id="carButton" onclick="onCarClick()">
-                    <img src="../Images/SacState_Vehicle.jpg" alt="Car">
-                    <p>Single-Occupant Car</p>
-                </div>
-                <div class="rankButton" id="carpoolButton" onclick="onCarpoolClick()">
-                    <img src="../Images/SacState_Carpool.jpg" alt="Carpool">
-                    <p>Carpool</p>
-                </div>
-                <div class="rankButton" id="busButton" onclick="onBusClick()">
-                    <img src="../Images/SacState_Vehicle.jpg" alt="Bus">
-                    <p>Bus</p>
-                </div>
-                <div class="rankButton" id="shuttleButton" onclick="onShuttleClick()">
-                    <img src="../Images/SacState_Shuttle1.jpg" alt="Shuttle">
-                    <p>Shuttle</p>
-                </div>
-                <div class="rankButton" id="bikeButton" onclick="onBikeClick()">
-                    <img src="../Images/SacState_WalkBike.jpg" alt="Bike">
-                    <p>Biking</p>
-                </div>
-                <div class="rankButton" id="walkButton" onclick="onWalkClick()">
-                    <img src="../Images/SacState_Vehicle.jpg" alt="Walk">
-                    <p>Walking</p>
-                </div>
-            </div>
+<head>
+    <title>Take Flight</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../Style/takeFlightStyle.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <style>
 
-            <div class="rankOptions">
-                <div class="rankedOption" id="carOption">
-                    <img src="../Images/SacState_Vehicle.jpg" alt="Car">
-                    <p class="vType">Single-Occupant Car</p>
-                    <!--Some template testing. This is how you can add the response to the html text. How to use with js is below-->
-                    <p>Address: <span th:text="${address}"></span></p>
-                    <p>Travel Time: <span th:text="${travelTimeByCar}"></span></p>
-                    <p>Travel Time Walking: <span th:text="${travelTimeByWalking}"></span></p>
-                    <p>Travel Time by Transit: <span th:text="${travelTimeByTransit}"></span></p>
-                    <p>Travel Time by Bike: <span th:text="${travelTimeBybike}"></span></p>
+    </style>
+</head>
 
-                    <p>Distance car: <span th:text="${travelDistanceByCar}"></span></p>
-                    <p>Distance Walking: <span th:text="${travelDistanceByWalking}"></span></p>
-                    <p>Distance Transit: <span th:text="${travelDistanceByTransit}"></span></p>
-                    <p>Distance Bike: <span th:text="${travelDistanceBybike}"></span></p>
+<body id="bodyId">
+    <div id="bodyWrapper">
 
-                    <p>Rank1 for time <span th:text="${rankTime[0]}"></span></p>
-                    <p>Rank2 for time <span th:text="${rankTime[1]}"></span></p>
-                    <p>Rank3 for time <span th:text="${rankTime[2]}"></span></p>
-
-                    <p>Ranks for carbon, but a diffrent way for example</p>
-                    <ul th:each="rankCarbon : ${rankCarbon}">
-                        <li th:text="${rankCarbon}"></li>
-                    </ul>
-
-                    <h3>Anyway you get it... Check out the script below for more examples!</h3>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                </div>
-                <div class="rankedOption" id="carpoolOption">
-                    <img src="../Images/SacState_Carpool.jpg" alt="Carpool">
-                    <p class="vType">Carpool</p>
-                </div>
-                <div class="rankedOption" id="busOption">
-                    <img src="../Images/SacState_Vehicle.jpg" alt="Bus">
-                    <p class="vType">Bus</p>
-                </div>
-                <div class="rankedOption" id="shuttleOption">
-                    <img src="../Images/SacState_Shuttle1.jpg" alt="Shuttle">
-                    <p class="vType">Shuttle</p>
-                </div>
-                <div class="rankedOption" id="bikeOption">
-                    <img src="../Images/SacState_WalkBike.jpg" alt="Biking">
-                    <p class="vType">Biking</p>
-                </div>
-                <div class="rankedOption" id="walkOption">
-                    <img src="../Images/SacState_Vehicle.jpg" alt="Walking">
-                    <p class="vType">Walking</p>
-                </div>
-
-            </div>
-
-            <div class="returnSurvey">
-                <a href="#">Retake Survey</a>
+        <!-- Header -->
+        <div class="headerBar">
+            <a href="https://www.csus.edu/"><img class="headerButton" alt="Sac State logo"
+                    src="https://www.csus.edu/NewCSUS2019-global-assets/_internal/images/logo-horizontal.png"></a>
+            <div class="buttonGroup">
+                <a href="https://www.csus.edu/apply/" class="headerButton">APPLY</a>
+                <a href="https://www.csus.edu/experience/" class="headerButton">EXPERIENCE</a>
+                <a href="https://www.csus.edu/campaign/" class="headerButton">GIVE</a>
             </div>
         </div>
-        
+        <div class="close-button">
+            <img src="../Images/close.png" alt="Close Icon by Vaadin Icons">
+            <!--Want to make our own.-->
+        </div>
+        <span class="topPrompt">Ranked Option by  <span th:text="${preferredRank}"></span><br>Click on an option or scroll for more information.</span>
+        <div class="rankBar" id="rankBar1" onClick="changeHeight()">
+            <div class="rankButton" id="carButton" onclick="onCarClick()">
+                <img src="../Images/SacState_Vehicle.jpg" alt="Car">
+                <p>Single-Occupant Car</p>
+            </div>
+            <div class="rankButton" id="carpoolButton" onclick="onCarpoolClick()">
+                <img src="../Images/SacState_Carpool.jpg" alt="Carpool">
+                <p>Carpool</p>
+            </div>
+            <div class="rankButton" id="busButton" onclick="onBusClick()">
+                <img src="../Images/SacState_Vehicle.jpg" alt="Bus">
+                <p>Bus</p>
+            </div>
+            <div class="rankButton" id="shuttleButton" onclick="onShuttleClick()">
+                <img src="../Images/SacState_Shuttle1.jpg" alt="Shuttle">
+                <p>Shuttle</p>
+            </div>
+            <div class="rankButton" id="bikeButton" onclick="onBikeClick()">
+                <img src="../Images/SacState_WalkBike.jpg" alt="Bike">
+                <p>Biking</p>
+            </div>
+            <div class="rankButton" id="walkButton" onclick="onWalkClick()">
+                <img src="../Images/SacState_Vehicle.jpg" alt="Walk">
+                <p>Walking</p>
+            </div>
+        </div>
+
+        <div class="rankOptions">
+            <div class="rankedOption" id="carOption"
+                th:attr="data-number=${preferredRank == 'cost'} ? ${rankCost[0]} : (${preferredRank == 'carbon'} ? ${rankCarbon[0]} : ${rankTime[0]})">
+                <img src="../Images/SacState_Vehicle.jpg" alt="Car">
+                <p class="vType">Single-Occupant Car</p>
+                <!--Some template testing. This is how you can add the response to the html text. How to use with js is below-->
+                <p>Car Travel Time: <span th:text="${travelTimeByCarString}"></span></p>
+                <p>Distance car: <span th:text="${travelDistanceByCarFormatted}"></span> miles</p>
+                <p>Car Travel Time: <span th:text="${travelTimeByCar}"></span></p>
+                <p>Distance car: <span th:text="${travelDistanceByCar}"></span></p>
+            </div>
+            <div class="rankedOption" id="carpoolOption" data-number="999991.0">
+                <img src="../Images/SacState_Carpool.jpg" alt="Carpool">
+                <p class="vType">Carpool</p>
+            </div>
+            <div class="rankedOption" id="busOption"
+                th:attr="data-number=${preferredRank == 'cost'} ? ${rankCost[1]} : (${preferredRank == 'carbon'} ? ${rankCarbon[1]} : ${rankTime[1]})">
+                <img src="../Images/SacState_Vehicle.jpg" alt="Bus">
+                <p class="vType">Bus</p>
+                <p>Travel Time Bus: <span th:text="${travelTimeByTransitString}"></span></p>
+                <p>Distance Bus: <span th:text="${travelDistanceByTransitFormatted}"></span> miles</p>
+                <p>Travel Time Bus: <span th:text="${travelTimeByTransit}"></span></p>
+                <p>Distance Bus: <span th:text="${travelDistanceByTransit}"></span></p>
+            </div>
+            <div class="rankedOption" id="shuttleOption" data-number="999991.0">
+                <img src="../Images/SacState_Shuttle1.jpg" alt="Shuttle">
+                <p class="vType">Shuttle</p>
+            </div>
+            <div class="rankedOption" id="bikeOption"
+                th:attr="data-number=${preferredRank == 'cost'} ? ${rankCost[2]} : (${preferredRank == 'carbon'} ? ${rankCarbon[2]} : ${rankTime[2]})">
+                <img src="../Images/SacState_WalkBike.jpg" alt="Biking">
+                <p class="vType">Biking</p>
+
+                <p>Travel Time Bike: <span th:text="${travelTimeByBikeString}"></span></p>
+                <p>Distance Bike: <span th:text="${travelDistanceByBikeFormatted}"></span> miles</p>
+
+                <p>Travel Time Bike: <span th:text="${travelTimeBybike}"></span></p>
+                <p>Distance Bike: <span th:text="${travelDistanceBybike}"></span></p>
+
+            </div>
+            <div class="rankedOption" id="walkOption"
+                th:attr="data-number=${preferredRank == 'cost'} ? ${rankCost[3]} : (${preferredRank == 'carbon'} ? ${rankCarbon[3]} : ${rankTime[3]})">
+                <img src="../Images/SacState_Vehicle.jpg" alt="Walking">
+                <p class="vType">Walking</p>
+
+                <p>Time Walking: <span th:text="${travelTimeByWalkingString}"></span></p>
+                <p>Distance Walking: <span th:text="${travelDistanceByWalkingFormatted}"></span> miles</p>
+
+                <p>Time Walking: <span th:text="${travelTimeByWalking}"></span></p>
+                <p>Distance Walking: <span th:text="${travelDistanceByWalking}"></span></p>
+
+            </div>
+            
+        </div>
+
+    </div>
+
+    <div class="returnSurvey">
+        <a href="http://localhost:8080/">Retake Survey</a>
+    </div>
+    </div>
 
 
-        <script src="../scripts/text_elements.js"></script>
-        <!--Here is where we create our global vars to use in scripts! Needs to be in the html, not js file-->
-        <script th:inline="javascript">
-            var address = /*[[${address}]]*/ "Lodi, CA"; //If you open this page statically  "Lodi, CA" is the value, otherwise everything in this line is replaced by 'well formed' javascript."
-            var travelTimeByCar = /*[[${travelTimeByCar}]]*/ "60 min"; 
-            var address = /*[[${mpg}]]*/ "12.3"; 
-            var address = /*[[${insurenceRate}]]*/ "80"; 
-            var rankTime = /*[[${rankTime}]]*/ "ERROR";
-        </script>
-    </body>
+
+    <script src="../scripts/text_elements.js"></script>
+    <!--Here is where we create our global vars to use in scripts! Needs to be in the html, not js file-->
+    <script th:inline="javascript">
+        var address = /*[[${address}]]*/ "Lodi, CA"; //If you open this page statically  "Lodi, CA" is the value, otherwise everything in this line is replaced by 'well formed' javascript."
+        var travelTimeByCar = /*[[${travelTimeByCar}]]*/ "60 min";
+        var address = /*[[${mpg}]]*/ "12.3";
+        var address = /*[[${insurenceRate}]]*/ "80";
+        var rankTime = /*[[${rankTime}]]*/ "ERROR";
+
+        var $wrapper = $('.rankOptions');
+        $wrapper.find('.rankedOption').sort(function (a, b) {
+            return $(a).data("number")-$(b).data("number");
+        })
+            .appendTo($wrapper);
+
+    </script>
+</body>
+
 </html>
