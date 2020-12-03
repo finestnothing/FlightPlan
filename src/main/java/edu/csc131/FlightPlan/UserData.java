@@ -156,5 +156,4 @@ public class UserData {
     public void setPreferredRank(String preferredRank) {
         this.preferredRank = preferredRank;
     }
-    
 }
