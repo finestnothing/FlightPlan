@@ -123,5 +123,5 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
    double getWalkC02(double distance) {
       return walk_c02_per_mile*distance;
    }
-   }}
+   }
 
