@@ -1,32 +1,23 @@
-var theSurvey = document.querySelector("#theSurvey");
-var modalOverlay = document.querySelector("#modal-overlay");
-var closeButton = document.querySelector("#close-button");
-var surveyStart = document.querySelector("#surveyStart");
-theSurvey.classList.toggle("closed");
-modalOverlay.classList.toggle("closed");
-closeButton.addEventListener("click", function(){
-    theSurvey.classList.toggle("closed");
-    modalOverlay.classList.toggle("closed");
-});
-surveyStart.addEventListener("click", function(){
-    theSurvey.classList.toggle("closed");
-    modalOverlay.classList.toggle("closed");
-});
+function on() {
+  document.documentElement.style.overflow = 'hidden';
+  document.body.scroll = "no";
+  document.getElementById("overlay").style.display = "block";
+  document.getElementById("intro-page").style.visibility = "hidden";
+}
 
-//Exit Survey Button
-var exitButton = document.querySelector("#exit-button");
-exitButton.addEventListener("click", function(){
-    theSurvey.classList.toggle("closed");
-    modalOverlay.classList.toggle("closed");
+function off() {
+  document.documentElement.style.overflow = 'scroll';
+  document.body.scroll = "yes";
+  document.getElementById("overlay").style.display = "none";
+  document.getElementById("intro-page").style.visibility = "visible";
+}
+
+$("#strSur").click( function() {
+	$(window).scrollTop(0);
 });
 
-
-
-//Survey Body Stuff
-/* 
-Orginal Page: http://thecodeplayer.com/walkthrough/jquery-multi-step-form-with-progress-bar 
-
-*/
+//Survey
+//Orginal Page: http://thecodeplayer.com/walkthrough/jquery-multi-step-form-with-progress-bar
 //jQuery time
 var current_fs, next_fs, previous_fs; //fieldsets
 var left, opacity, scale; //fieldset properties which we will animate
@@ -54,7 +45,10 @@ $(".next").click(function(){
 			left = (now * 50)+"%";
 			//3. increase opacity of next_fs to 1 as it moves in
 			opacity = 1 - now;
-			current_fs.css({'transform': 'scale('+scale+')'});
+			current_fs.css({
+        'transform': 'scale('+scale+')',
+        'position': 'absolute'
+      });
 			next_fs.css({'left': left, 'opacity': opacity});
 		}, 
 		duration: 800, 
@@ -102,4 +96,6 @@ $(".previous").click(function(){
 	});
 });
 
-
+//$(".submit").click(function(){
+//	return false;
+//})
