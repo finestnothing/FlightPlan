@@ -29,7 +29,8 @@
             <img src="../Images/close.png" alt="Close Icon by Vaadin Icons">
             <!--Want to make our own.-->
         </div>
-        <span class="topPrompt">Ranked Option by  <span th:text="${preferredRank}"></span><br>Click on an option or scroll for more information.</span>
+        <span class="topPrompt">Ranked Option by <span th:text="${preferredRank}"></span><br>Click on an option or
+            scroll for more information.</span>
         <div class="rankBar" id="rankBar1" onClick="changeHeight()">
             <div class="rankButton" id="carButton" onclick="onCarClick()">
                 <img src="../Images/SacState_Vehicle.jpg" alt="Car">
@@ -60,13 +61,22 @@
         <div class="rankOptions">
             <div class="rankedOption" id="carOption"
                 th:attr="data-number=${preferredRank == 'cost'} ? ${rankCost[0]} : (${preferredRank == 'carbon'} ? ${rankCarbon[0]} : ${rankTime[0]})">
-                <img src="../Images/SacState_Vehicle.jpg" alt="Car">
-                <p class="vType">Single-Occupant Car</p>
-                <!--Some template testing. This is how you can add the response to the html text. How to use with js is below-->
-                <p>Car Travel Time: <span th:text="${travelTimeByCarString}"></span></p>
-                <p>Distance car: <span th:text="${travelDistanceByCarFormatted}"></span> miles</p>
-                <p>Car Travel Time: <span th:text="${travelTimeByCar}"></span></p>
-                <p>Distance car: <span th:text="${travelDistanceByCar}"></span></p>
+                <div>
+                    <p class="vType">Single-Occupant Car</p>
+                    <img src="../Images/SacState_Vehicle.jpg" alt="Car">
+                    <p>Car Travel Time: <span th:text="${travelTimeByCarString}"></span></p>
+                    <p>Distance car: <span th:text="${travelDistanceByCarFormatted}"></span> miles</p>
+                    <p>Cost car: <span th:text="${travelDistanceByCarFormatted}"></span> miles</p>
+                </div>
+                <div>
+                    <iframe
+                    width="600"
+                    height="450"
+                    frameborder="0" style="border:0"
+                    th:attr="src=${mapURLForCar}"
+                    allowfullscreen>
+                  </iframe>
+                </div>
             </div>
             <div class="rankedOption" id="carpoolOption" data-number="999991.0">
                 <img src="../Images/SacState_Carpool.jpg" alt="Carpool">
@@ -74,12 +84,21 @@
             </div>
             <div class="rankedOption" id="busOption"
                 th:attr="data-number=${preferredRank == 'cost'} ? ${rankCost[1]} : (${preferredRank == 'carbon'} ? ${rankCarbon[1]} : ${rankTime[1]})">
-                <img src="../Images/SacState_Vehicle.jpg" alt="Bus">
                 <p class="vType">Bus</p>
-                <p>Travel Time Bus: <span th:text="${travelTimeByTransitString}"></span></p>
-                <p>Distance Bus: <span th:text="${travelDistanceByTransitFormatted}"></span> miles</p>
-                <p>Travel Time Bus: <span th:text="${travelTimeByTransit}"></span></p>
-                <p>Distance Bus: <span th:text="${travelDistanceByTransit}"></span></p>
+                <div>
+                    <img src="../Images/SacState_Vehicle.jpg" alt="Bus">
+                    <p>Travel Time Bus: <span th:text="${travelTimeByTransitString}"></span></p>
+                    <p>Distance Bus: <span th:text="${travelDistanceByTransitFormatted}"></span> miles</p>
+                </div>
+                <div>
+                    <iframe
+                    width="600"
+                    height="450"
+                    frameborder="0" style="border:0"
+                    th:attr="src=${mapURLForTransit}"
+                    allowfullscreen>
+                  </iframe>
+                </div>
             </div>
             <div class="rankedOption" id="shuttleOption" data-number="999991.0">
                 <img src="../Images/SacState_Shuttle1.jpg" alt="Shuttle">
@@ -87,29 +106,42 @@
             </div>
             <div class="rankedOption" id="bikeOption"
                 th:attr="data-number=${preferredRank == 'cost'} ? ${rankCost[2]} : (${preferredRank == 'carbon'} ? ${rankCarbon[2]} : ${rankTime[2]})">
-                <img src="../Images/SacState_WalkBike.jpg" alt="Biking">
+
                 <p class="vType">Biking</p>
-
-                <p>Travel Time Bike: <span th:text="${travelTimeByBikeString}"></span></p>
-                <p>Distance Bike: <span th:text="${travelDistanceByBikeFormatted}"></span> miles</p>
-
-                <p>Travel Time Bike: <span th:text="${travelTimeBybike}"></span></p>
-                <p>Distance Bike: <span th:text="${travelDistanceBybike}"></span></p>
-
+                <div>
+                    <img src="../Images/SacState_WalkBike.jpg" alt="Biking">
+                    <p>Travel Time Bike: <span th:text="${travelTimeByBikeString}"></span></p>
+                    <p>Distance Bike: <span th:text="${travelDistanceByBikeFormatted}"></span> miles</p>
+                </div>
+                <div>
+                    <iframe
+                    width="600"
+                    height="450"
+                    frameborder="0" style="border:0"
+                    th:attr="src=${mapURLForBike}"
+                    allowfullscreen>
+                  </iframe>
+                </div>
             </div>
             <div class="rankedOption" id="walkOption"
                 th:attr="data-number=${preferredRank == 'cost'} ? ${rankCost[3]} : (${preferredRank == 'carbon'} ? ${rankCarbon[3]} : ${rankTime[3]})">
-                <img src="../Images/SacState_Vehicle.jpg" alt="Walking">
                 <p class="vType">Walking</p>
-
-                <p>Time Walking: <span th:text="${travelTimeByWalkingString}"></span></p>
-                <p>Distance Walking: <span th:text="${travelDistanceByWalkingFormatted}"></span> miles</p>
-
-                <p>Time Walking: <span th:text="${travelTimeByWalking}"></span></p>
-                <p>Distance Walking: <span th:text="${travelDistanceByWalking}"></span></p>
-
+                <div>
+                    <img src="../Images/SacState_Vehicle.jpg" alt="Walking">
+                    <p>Time Walking: <span th:text="${travelTimeByWalkingString}"></span></p>
+                    <p>Distance Walking: <span th:text="${travelDistanceByWalkingFormatted}"></span> miles</p>
+                </div>
+                <div>
+                    <iframe
+                    width="600"
+                    height="450"
+                    frameborder="0" style="border:0"
+                    th:attr="src=${mapURLForWalk}"
+                    allowfullscreen>
+                  </iframe>
+                </div>
             </div>
-            
+
         </div>
 
     </div>
@@ -132,7 +164,7 @@
 
         var $wrapper = $('.rankOptions');
         $wrapper.find('.rankedOption').sort(function (a, b) {
-            return $(a).data("number")-$(b).data("number");
+            return $(a).data("number") - $(b).data("number");
         })
             .appendTo($wrapper);
 

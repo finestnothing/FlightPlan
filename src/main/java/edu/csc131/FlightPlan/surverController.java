@@ -30,11 +30,11 @@ public class surverController {
    * 
    * @param address
    * @param mpg
-   * @param insurenceRate
+   * @param email
    * @return Forward to Get mapped function.
    */
   @PostMapping(path = "/takeFlight") // Map ONLY POST Requests
-  public String saveData(@RequestParam String address, @RequestParam("rank") String preferredRank) {
+  public String saveData(@RequestParam String address, @RequestParam("rank") String preferredRank, @RequestParam("email") String email) {
     // @RequestParam means it is a parameter from the GET or POST request. Here we
     // are using POST.
 
@@ -78,7 +78,7 @@ public class surverController {
          for (double each : ranked_by_whatever)
             System.out.println(each);
       */ 
-      
+    userData.setUserEmail(email);
     userData.setAddress(address);
     userData.setPreferredRank(preferredRank);
 
@@ -144,6 +144,18 @@ public class surverController {
     model.addAttribute("travelDistanceByWalkingFormatted", format.getMetersToMiles(userData.getTravelDistanceByWalking()));
 
     model.addAttribute("preferredRank", userData.getPreferredRank());
+    model.addAttribute("mapURLForCar", "https://www.google.com/maps/embed/v1/directions?key=AIzaSyDVo4or3BW6Gcuz7FOMPsyGBBi0MbvoIRQ&origin="
+                        +userData.getAddress().replace(" ", "+")+"&destination=6000+J+St,+Sacramento,+CA+95819&mode=driving");
+
+    model.addAttribute("mapURLForWalk", "https://www.google.com/maps/embed/v1/directions?key=AIzaSyDVo4or3BW6Gcuz7FOMPsyGBBi0MbvoIRQ&origin="
+                                        +userData.getAddress().replace(" ", "+")+"&destination=6000+J+St,+Sacramento,+CA+95819&mode=walking");
+
+    model.addAttribute("mapURLForTransit", "https://www.google.com/maps/embed/v1/directions?key=AIzaSyDVo4or3BW6Gcuz7FOMPsyGBBi0MbvoIRQ&origin="
+                                        +userData.getAddress().replace(" ", "+")+"&destination=6000+J+St,+Sacramento,+CA+95819&mode=transit");
+
+    model.addAttribute("mapURLForBike", "https://www.google.com/maps/embed/v1/directions?key=AIzaSyDVo4or3BW6Gcuz7FOMPsyGBBi0MbvoIRQ&origin="
+                                        +userData.getAddress().replace(" ", "+")+"&destination=6000+J+St,+Sacramento,+CA+95819&mode=bicycling");
+    
     
     return "/takeFlight.html"; 
   }
