@@ -1,6 +1,7 @@
 package edu.csc131.FlightPlan;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,13 @@ public class surverController {
   private DataRepo dataRepo;// This is the repo object. You use it to save or load objects.
   private UserData userData = new UserData();// This is the User Data object. We store this object in the database.
                                              // Neat!
+  @Value("${app.serverapikey}")
+  private String googleServerSideAPIKEY;
+
+  @Value("${app.webapikey}")
+  private String googleWebAPIKEY;
+
+
 
   /**
    * All params are from request attrbutes.
@@ -40,10 +48,10 @@ public class surverController {
 
     // Creates a TimeTo object. This class will give us the time to a destnation.
     // We can also add functionality to get distance as well.
-
+    
     TimeTo time;
     try {
-      time = new TimeTo(address);
+      time = new TimeTo(address, googleServerSideAPIKEY);
     } catch (NotValidAddressException e) {
 
       e.printStackTrace();
@@ -144,16 +152,16 @@ public class surverController {
     model.addAttribute("travelDistanceByWalkingFormatted", format.getMetersToMiles(userData.getTravelDistanceByWalking()));
 
     model.addAttribute("preferredRank", userData.getPreferredRank());
-    model.addAttribute("mapURLForCar", "https://www.google.com/maps/embed/v1/directions?key=AIzaSyDVo4or3BW6Gcuz7FOMPsyGBBi0MbvoIRQ&origin="
+    model.addAttribute("mapURLForCar", "https://www.google.com/maps/embed/v1/directions?key="+googleWebAPIKEY+"&origin="
                         +userData.getAddress().replace(" ", "+")+"&destination=6000+J+St,+Sacramento,+CA+95819&mode=driving");
 
-    model.addAttribute("mapURLForWalk", "https://www.google.com/maps/embed/v1/directions?key=AIzaSyDVo4or3BW6Gcuz7FOMPsyGBBi0MbvoIRQ&origin="
+    model.addAttribute("mapURLForWalk", "https://www.google.com/maps/embed/v1/directions?key="+googleWebAPIKEY+"&origin="
                                         +userData.getAddress().replace(" ", "+")+"&destination=6000+J+St,+Sacramento,+CA+95819&mode=walking");
 
-    model.addAttribute("mapURLForTransit", "https://www.google.com/maps/embed/v1/directions?key=AIzaSyDVo4or3BW6Gcuz7FOMPsyGBBi0MbvoIRQ&origin="
+    model.addAttribute("mapURLForTransit", "https://www.google.com/maps/embed/v1/directions?key="+googleWebAPIKEY+"&origin="
                                         +userData.getAddress().replace(" ", "+")+"&destination=6000+J+St,+Sacramento,+CA+95819&mode=transit");
 
-    model.addAttribute("mapURLForBike", "https://www.google.com/maps/embed/v1/directions?key=AIzaSyDVo4or3BW6Gcuz7FOMPsyGBBi0MbvoIRQ&origin="
+    model.addAttribute("mapURLForBike", "https://www.google.com/maps/embed/v1/directions?key="+googleWebAPIKEY+"&origin="
                                         +userData.getAddress().replace(" ", "+")+"&destination=6000+J+St,+Sacramento,+CA+95819&mode=bicycling");
     
     
