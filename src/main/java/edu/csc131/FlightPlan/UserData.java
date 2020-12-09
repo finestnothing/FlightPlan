@@ -28,6 +28,8 @@ public class UserData {
     private double[] rankTime;
     private double[] rankCost;
 
+    private String userEmail;
+
 
     public Integer getId() {
         return id;
@@ -155,5 +157,13 @@ public class UserData {
 
     public void setPreferredRank(String preferredRank) {
         this.preferredRank = preferredRank;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 }
