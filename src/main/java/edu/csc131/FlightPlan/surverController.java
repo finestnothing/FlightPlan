@@ -63,11 +63,11 @@ public class surverController {
 
     //Hard-coded input
 
-         String carType = "Sedan";
+         int carMPG = 25;
    
       //Creates Ranking object
          Ranking r = new Ranking(travelDistanceByWalking, travelTimeByWalk, travelDistanceByBike, travelDistanceByBike,
-                                 travelDistanceByTransit, travelTimeByTransit, travelDistanceByCar, travelTimeByCar, carType);
+                                 travelDistanceByTransit, travelTimeByTransit, travelDistanceByCar, travelTimeByCar, carMPG);
          
          
       /* NOTE:
