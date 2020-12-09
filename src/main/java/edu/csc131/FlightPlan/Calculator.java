@@ -8,7 +8,7 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
    private int carbon_per_gallon_fuel=8887; //number in grams. must convert to pounds using conversion rate
    private double grams_to_lbs_conversion_rate=0.00220462;
    private double cost_per_gallon_fuel=3.50;
-   
+
    //Bicycle
    private double bike_cost_per_mile=0.2643;
    private double bike_c02_per_mile=0.1243;
@@ -32,6 +32,7 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
    double getCarCost(double distance, int mpg) {
       return distance*cost_per_gallon_fuel/mpg + cost_parking_pass_per_trip; //assumed 5 dollars to park
    }
+
    /**
     * Calculate carbon produced during trip, by vehicle type.
     * @param distance
@@ -63,12 +64,12 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
    double getCarC02PerSemester(int tripsPerWeek, double distance, int mpg) {
       return getCarC02(distance, mpg)*tripsPerWeek*weeks_per_semester*2; //multiply by two for each direction
    }
-   
+
    /**
     * Calculate total cost of the trip by bicycle
     * @param distance
     * @return cost
-    */   
+    */
    double getBikeCost(double distance) {
       return bike_cost_per_mile*distance;
    }
@@ -76,7 +77,7 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
     * Calculate total carbon produced by bicycle and it's rider during the trip
     * @param distance
     * @return carbon emission
-    */ 
+    */
    double getBikeC02(double distance) {
       return bike_c02_per_mile*distance;
    }
@@ -98,12 +99,12 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
    double getBikeC02PerSemester(int tripsPerWeek, double distance) {
       return getBikeC02(distance)*tripsPerWeek*weeks_per_semester*2;
    }
-   
+
    /**
     * Calculate total cost of the trip by transit (should be 0 for foreseeable future)
     * @param distance
     * @return cost
-    */ 
+    */
    double getTransitCost(double distance) {
       return transit_cost_per_mile*distance;
    }
@@ -111,7 +112,7 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
     * Calculate total carbon produced during the transit trip (adjusted per rider)
     * @param distance
     * @return cost
-    */ 
+    */
    double getTransitC02(double distance) {
       return transit_c02_per_mile*distance;
    }
@@ -133,12 +134,12 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
    double getTransitC02PerSemester(int tripsPerWeek, double distance) {
       return getTransitC02(distance)*tripsPerWeek*weeks_per_semester*2;
    }
-   
+
    /**
     * Calculate total cost of the trip by foot (assumed entirely on caloric deficit)
     * @param distance
     * @return cost
-    */ 
+    */
    double getWalkCost(double distance) {
       return walk_cost_per_mile*distance;
    }
@@ -146,7 +147,7 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
     * Calculate total carbon produced by walking trip
     * @param distance
     * @return cost
-    */ 
+    */
    double getWalkC02(double distance) {
       return walk_c02_per_mile*distance;
    }
