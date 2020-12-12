@@ -1,174 +1,264 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en">
 <head>
-    <title>Take Flight</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../Style/takeFlightStyle.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-    <style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    </style>
+    <!-- Website Title -->
+    <title>Sacramento State UTAPS</title>
+    
+    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500,700&display=swap&subset=latin-ext" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600&display=swap&subset=latin-ext" rel="stylesheet">
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="../css/fontawesome-all.css" rel="stylesheet">
+    <link href="../css/swiper.css" rel="stylesheet">
+	<link href="../css/magnific-popup.css" rel="stylesheet">
+	<link href="../css/styles.css" rel="stylesheet">
+    <link href="../css/rescustom.css" rel="stylesheet">
+	
+	<!-- Favicon  -->
+    <link rel="icon" href="../images/favicon.ico">
 </head>
-
-<body id="bodyId">
-    <div id="bodyWrapper">
-
-        <!-- Header -->
-        <div class="headerBar">
-            <a href="https://www.csus.edu/"><img class="headerButton" alt="Sac State logo"
-                    src="https://www.csus.edu/NewCSUS2019-global-assets/_internal/images/logo-horizontal.png"></a>
-            <div class="buttonGroup">
-                <a href="https://www.csus.edu/apply/" class="headerButton">APPLY</a>
-                <a href="https://www.csus.edu/experience/" class="headerButton">EXPERIENCE</a>
-                <a href="https://www.csus.edu/campaign/" class="headerButton">GIVE</a>
-            </div>
+<body data-spy="scroll" data-target=".fixed-top">
+    
+    <!-- Preloader -->
+	<div class="spinner-wrapper">
+        <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
         </div>
-        <div class="close-button">
-            <img src="../Images/close.png" alt="Close Icon by Vaadin Icons">
-            <!--Want to make our own.-->
-        </div>
-        <span class="topPrompt">Ranked Option by <span th:text="${preferredRank}"></span><br>Click on an option or
-            scroll for more information.</span>
-        <div class="rankBar" id="rankBar1" onClick="changeHeight()">
-            <div class="rankButton" id="carButton" onclick="onCarClick()">
-                <img src="../Images/SacState_Vehicle.jpg" alt="Car">
-                <p>Single-Occupant Car</p>
-            </div>
-            <div class="rankButton" id="carpoolButton" onclick="onCarpoolClick()">
-                <img src="../Images/SacState_Carpool.jpg" alt="Carpool">
-                <p>Carpool</p>
-            </div>
-            <div class="rankButton" id="busButton" onclick="onBusClick()">
-                <img src="../Images/SacState_Vehicle.jpg" alt="Bus">
-                <p>Bus</p>
-            </div>
-            <div class="rankButton" id="shuttleButton" onclick="onShuttleClick()">
-                <img src="../Images/SacState_Shuttle1.jpg" alt="Shuttle">
-                <p>Shuttle</p>
-            </div>
-            <div class="rankButton" id="bikeButton" onclick="onBikeClick()">
-                <img src="../Images/SacState_WalkBike.jpg" alt="Bike">
-                <p>Biking</p>
-            </div>
-            <div class="rankButton" id="walkButton" onclick="onWalkClick()">
-                <img src="../Images/SacState_Vehicle.jpg" alt="Walk">
-                <p>Walking</p>
-            </div>
-        </div>
-
-        <div class="rankOptions">
-            <div class="rankedOption" id="carOption"
-                th:attr="data-number=${preferredRank == 'cost'} ? ${rankCost[0]} : (${preferredRank == 'carbon'} ? ${rankCarbon[0]} : ${rankTime[0]})">
-                <div>
-                    <p class="vType">Single-Occupant Car</p>
-                    <img src="../Images/SacState_Vehicle.jpg" alt="Car">
-                    <p>Car Travel Time: <span th:text="${travelTimeByCarString}"></span></p>
-                    <p>Distance car: <span th:text="${travelDistanceByCarFormatted}"></span> miles</p>
-                    <p>Cost car: <span th:text="${travelDistanceByCarFormatted}"></span> miles</p>
-                </div>
-                <div>
-                    <iframe
-                    width="600"
-                    height="450"
-                    frameborder="0" style="border:0"
-                    th:attr="src=${mapURLForCar}"
-                    allowfullscreen>
-                  </iframe>
-                </div>
-            </div>
-            <div class="rankedOption" id="carpoolOption" data-number="999991.0">
-                <img src="../Images/SacState_Carpool.jpg" alt="Carpool">
-                <p class="vType">Carpool</p>
-            </div>
-            <div class="rankedOption" id="busOption"
-                th:attr="data-number=${preferredRank == 'cost'} ? ${rankCost[1]} : (${preferredRank == 'carbon'} ? ${rankCarbon[1]} : ${rankTime[1]})">
-                <p class="vType">Bus</p>
-                <div>
-                    <img src="../Images/SacState_Vehicle.jpg" alt="Bus">
-                    <p>Travel Time Bus: <span th:text="${travelTimeByTransitString}"></span></p>
-                    <p>Distance Bus: <span th:text="${travelDistanceByTransitFormatted}"></span> miles</p>
-                </div>
-                <div>
-                    <iframe
-                    width="600"
-                    height="450"
-                    frameborder="0" style="border:0"
-                    th:attr="src=${mapURLForTransit}"
-                    allowfullscreen>
-                  </iframe>
-                </div>
-            </div>
-            <div class="rankedOption" id="shuttleOption" data-number="999991.0">
-                <img src="../Images/SacState_Shuttle1.jpg" alt="Shuttle">
-                <p class="vType">Shuttle</p>
-            </div>
-            <div class="rankedOption" id="bikeOption"
-                th:attr="data-number=${preferredRank == 'cost'} ? ${rankCost[2]} : (${preferredRank == 'carbon'} ? ${rankCarbon[2]} : ${rankTime[2]})">
-
-                <p class="vType">Biking</p>
-                <div>
-                    <img src="../Images/SacState_WalkBike.jpg" alt="Biking">
-                    <p>Travel Time Bike: <span th:text="${travelTimeByBikeString}"></span></p>
-                    <p>Distance Bike: <span th:text="${travelDistanceByBikeFormatted}"></span> miles</p>
-                </div>
-                <div>
-                    <iframe
-                    width="600"
-                    height="450"
-                    frameborder="0" style="border:0"
-                    th:attr="src=${mapURLForBike}"
-                    allowfullscreen>
-                  </iframe>
-                </div>
-            </div>
-            <div class="rankedOption" id="walkOption"
-                th:attr="data-number=${preferredRank == 'cost'} ? ${rankCost[3]} : (${preferredRank == 'carbon'} ? ${rankCarbon[3]} : ${rankTime[3]})">
-                <p class="vType">Walking</p>
-                <div>
-                    <img src="../Images/SacState_Vehicle.jpg" alt="Walking">
-                    <p>Time Walking: <span th:text="${travelTimeByWalkingString}"></span></p>
-                    <p>Distance Walking: <span th:text="${travelDistanceByWalkingFormatted}"></span> miles</p>
-                </div>
-                <div>
-                    <iframe
-                    width="600"
-                    height="450"
-                    frameborder="0" style="border:0"
-                    th:attr="src=${mapURLForWalk}"
-                    allowfullscreen>
-                  </iframe>
-                </div>
-            </div>
-
-        </div>
-
     </div>
+    <!-- end of preloader -->
 
-    <div class="returnSurvey">
-        <a href="http://localhost:8080/">Retake Survey</a>
-    </div>
-    </div>
+    <!-- Header -->
+    <header id="header" class="header">
+        <div class="header-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="text-container">
+                            <h1>RESULTS</h1>
+                        </div>
+                    </div> <!-- end of col -->
+                </div> <!-- end of row -->
+            </div> <!-- end of container -->
+        </div> <!-- end of header-content -->
+    </header> <!-- end of header -->
+    <!-- end of header -->
+
+    <!-- Projects -->
+	<div id="projects" class="filter">
+		<div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Select Option To Rank Your Results</h2>
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Filter -->
+                    <div class="button-group filters-button-group">
+                        <a class="button is-checked" data-filter="*"><span>SHOW ALL</span></a>
+                        <a class="button" data-filter=".time"><span>TIME</span></a>
+                        <a class="button" data-filter=".cost"><span>COST</span></a>
+                        <a class="button" data-filter=".carbon"><span>CARBON</span></a>
+                    </div> <!-- end of button group -->
+                    <div class="grid">
+                        <div class="element-item time">
+                            <a class="popup-with-move-anim" href="#project-1"><div class="element-item-overlay"><span>CAR</span></div><img src="../images/project-1.jpg" alt="alternative"></a>
+                        </div>
+                        <div class="element-item time">
+                            <a class="popup-with-move-anim" href="#project-2"><div class="element-item-overlay"><span>CARPOOL</span></div><img src="../images/project-2.jpg" alt="alternative"></a>
+                        </div>
+                        <div class="element-item cost carbon">
+                            <a class="popup-with-move-anim" href="#project-3"><div class="element-item-overlay"><span>BUS</span></div><img src="../images/project-3.jpg" alt="alternative"></a>
+                        </div>
+                        <div class="element-item cost time carbon">
+                            <a class="popup-with-move-anim" href="#project-4"><div class="element-item-overlay"><span>SHUTTLE</span></div><img src="../images/project-4.jpg" alt="alternative"></a>
+                        </div>
+                        <div class="element-item cost time carbon">
+                            <a class="popup-with-move-anim" href="#project-5"><div class="element-item-overlay"><span>BIKING</span></div><img src="../images/project-5.jpg" alt="alternative"></a>
+                        </div>
+                        <div class="element-item time carbon">
+                            <a class="popup-with-move-anim" href="#project-6"><div class="element-item-overlay"><span>WALKING</span></div><img src="../images/project-6.jpg" alt="alternative"></a>
+                        </div>
+                    </div> <!-- end of grid -->
+                    <!-- end of filter -->
+                    
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+		</div> <!-- end of container -->
+    </div> <!-- end of filter -->
+    <!-- end of projects -->
 
 
+    <!-- Project Lightboxes -->
+    <!-- Lightbox -->
+    <div id="project-1" class="lightbox-basic zoom-anim-dialog mfp-hide">
+        <div class="row">
+            <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
+            <div class="col-lg-8">
+                <!--<img class="img-fluid" src="../images/project-1.jpg" alt="alternative">-->
+                <!--Google map-->
+                <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
+                  <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
+                    style="border:0" allowfullscreen></iframe>
+                </div>
+                <!--Google Maps-->
+            </div> <!-- end of col -->
+            <div class="col-lg-4">
+                <hr class="line-heading">
+                <h3>CAR</h3>
+                <hr class="line-heading">
+                <p>Details:</p>
+                <p>Need a solid foundation for your business growth plans? Aria will help you manage sales and meet your current needs</p>
+                <p>By offering the best professional services and quality products in the market. Don't hesitate and get in touch with us.</p>
+                <a class="btn-outline-reg mfp-close as-button" href="#projects">BACK</a> 
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of lightbox-basic -->
+    <!-- end of lightbox -->
 
-    <script src="../scripts/text_elements.js"></script>
-    <!--Here is where we create our global vars to use in scripts! Needs to be in the html, not js file-->
-    <script th:inline="javascript">
-        var address = /*[[${address}]]*/ "Lodi, CA"; //If you open this page statically  "Lodi, CA" is the value, otherwise everything in this line is replaced by 'well formed' javascript."
-        var travelTimeByCar = /*[[${travelTimeByCar}]]*/ "60 min";
-        var address = /*[[${mpg}]]*/ "12.3";
-        var address = /*[[${insurenceRate}]]*/ "80";
-        var rankTime = /*[[${rankTime}]]*/ "ERROR";
+    <!-- Lightbox -->
+    <div id="project-2" class="lightbox-basic zoom-anim-dialog mfp-hide">
+        <div class="row">
+            <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
+            <div class="col-lg-8">
+                <!--<img class="img-fluid" src="../images/project-2.jpg" alt="alternative">-->
+                <!--Google map-->
+                <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
+                  <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
+                    style="border:0" allowfullscreen></iframe>
+                </div>
+                <!--Google Maps-->
+            </div> <!-- end of col -->
+            <div class="col-lg-4">
+                <hr class="line-heading">
+                <h3>CARPOOL</h3>
+                <hr class="line-heading">
+                <p>Details:</p>
+                <p>Need a solid foundation for your business growth plans? Aria will help you manage sales and meet your current needs</p>
+                <p>By offering the best professional services and quality products in the market. Don't hesitate and get in touch with us.</p>
+                <a class="btn-outline-reg mfp-close as-button" href="#projects">BACK</a> 
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of lightbox-basic -->
+    <!-- end of lightbox -->
 
-        var $wrapper = $('.rankOptions');
-        $wrapper.find('.rankedOption').sort(function (a, b) {
-            return $(a).data("number") - $(b).data("number");
-        })
-            .appendTo($wrapper);
+    <!-- Lightbox -->
+    <div id="project-3" class="lightbox-basic zoom-anim-dialog mfp-hide">
+        <div class="row">
+            <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
+            <div class="col-lg-8">
+                <!--<img class="img-fluid" src="../images/project-3.jpg" alt="alternative">-->
+                <!--Google map-->
+                <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
+                  <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
+                    style="border:0" allowfullscreen></iframe>
+                </div>
+                <!--Google Maps-->
+            </div> <!-- end of col -->
+            <div class="col-lg-4">
+                <hr class="line-heading">
+                <h3>BUS</h3>
+                <hr class="line-heading">
+                <p>Details:</p>
+                <p>Need a solid foundation for your business growth plans? Aria will help you manage sales and meet your current needs</p>
+                <p>By offering the best professional services and quality products in the market. Don't hesitate and get in touch with us.</p>
+                <a class="btn-outline-reg mfp-close as-button" href="#projects">BACK</a> 
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of lightbox-basic -->
+    <!-- end of lightbox -->
 
-    </script>
-</body>
+    <!-- Lightbox -->
+    <div id="project-4" class="lightbox-basic zoom-anim-dialog mfp-hide">
+        <div class="row">
+            <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
+            <div class="col-lg-8">
+                <!--<img class="img-fluid" src="../images/project-4.jpg" alt="alternative">-->
+                <!--Google map-->
+                <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
+                  <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
+                    style="border:0" allowfullscreen></iframe>
+                </div>
+                <!--Google Maps-->
+            </div> <!-- end of col -->
+            <div class="col-lg-4">
+                <hr class="line-heading">
+                <h3>SHUTTLE</h3>
+                <hr class="line-heading">
+                <p>Details:</p>
+                <p>Need a solid foundation for your business growth plans? Aria will help you manage sales and meet your current needs</p>
+                <p>By offering the best professional services and quality products in the market. Don't hesitate and get in touch with us.</p>
+                <a class="btn-outline-reg mfp-close as-button" href="#projects">BACK</a> 
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of lightbox-basic -->
+    <!-- end of lightbox -->
 
-</html>
+    <!-- Lightbox -->
+    <div id="project-5" class="lightbox-basic zoom-anim-dialog mfp-hide">
+        <div class="row">
+            <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
+            <div class="col-lg-8">
+                <!--<img class="img-fluid" src="../images/project-5.jpg" alt="alternative">-->
+                <!--Google map-->
+                <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
+                  <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
+                    style="border:0" allowfullscreen></iframe>
+                </div>
+                <!--Google Maps-->
+            </div> <!-- end of col -->
+            <div class="col-lg-4">
+                <hr class="line-heading">
+                <h3>BIKING</h3>
+                <hr class="line-heading">
+                <p>Details:</p>
+                <p>Need a solid foundation for your business growth plans? Aria will help you manage sales and meet your current needs</p>
+                <p>By offering the best professional services and quality products in the market. Don't hesitate and get in touch with us.</p>
+                <a class="btn-outline-reg mfp-close as-button" href="#projects">BACK</a> 
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of lightbox-basic -->
+    <!-- end of lightbox -->
+
+    <!-- Lightbox -->
+    <div id="project-6" class="lightbox-basic zoom-anim-dialog mfp-hide">
+        <div class="row">
+            <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
+            <div class="col-lg-8">
+                <!--<img class="img-fluid" src="../images/project-6.jpg" alt="alternative">-->
+                <!--Google map-->
+                <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
+                  <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
+                    style="border:0" allowfullscreen></iframe>
+                </div>
+                <!--Google Maps-->
+            </div> <!-- end of col -->
+            <div class="col-lg-4">
+                <hr class="line-heading">
+                <h3>WALKING</h3>
+                <hr class="line-heading">
+                <p>Details:</p>
+                <p>Need a solid foundation for your business growth plans? Aria will help you manage sales and meet your current needs</p>
+                <p>By offering the best professional services and quality products in the market. Don't hesitate and get in touch with us.</p>
+                <a class="btn-outline-reg mfp-close as-button" href="#projects">BACK</a> 
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of lightbox-basic -->
+    <!-- end of lightbox -->
+    <!-- end of project lightboxes -->    
+    	
+    <!-- Scripts -->
+    <script src="../js/jquery.min.js"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
+    <script src="../js/popper.min.js"></script> <!-- Popper tooltip library for Bootstrap -->
+    <script src="../js/bootstrap.min.js"></script> <!-- Bootstrap framework -->
+    <script src="../js/jquery.easing.min.js"></script> <!-- jQuery Easing for smooth scrolling between anchors -->
+    <script src="../js/swiper.min.js"></script> <!-- Swiper for image and text sliders -->
+    <script src="../js/jquery.magnific-popup.js"></script> <!-- Magnific Popup for lightboxes -->
+    <script src="../js/morphext.min.js"></script> <!-- Morphtext rotating text in the header -->
+    <script src="../js/isotope.pkgd.min.js"></script> <!-- Isotope for filter -->
+    <script src="../js/scripts.js"></script> <!-- Custom scripts -->
