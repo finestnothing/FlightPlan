@@ -69,37 +69,37 @@
                             <p class="cost" hidden><span th:text="${rankCost[0]}"></span></p>
                             <p class="carbon" hidden><span th:text="${rankCarbon[0]}"></span></p>
                             <p class="time" hidden><span th:text="${rankTime[0]}"></span></p>
-                            <a class="popup-with-move-anim" href="#project-1"><div class="element-item-overlay"><span>CAR</span></div><img src="../images/project-1.jpg" alt="alternative"></a>
+                            <a class="popup-with-move-anim" href="#CAR-OPTION"><div class="element-item-overlay"><span>CAR</span></div><img src="../images/project-1.jpg" alt="alternative"></a>
                         </div>
                         <div class="element-item">
                             <p class="cost" hidden>100000000</p>
                             <p class="carbon" hidden>100000000</p>
                             <p class="time" hidden>100000000</p>
-                            <a class="popup-with-move-anim" href="#project-2"><div class="element-item-overlay"><span>CARPOOL</span></div><img src="../images/project-2.jpg" alt="alternative"></a>
+                            <a class="popup-with-move-anim" href="#CARPOOL-OPTION"><div class="element-item-overlay"><span>CARPOOL</span></div><img src="../images/project-2.jpg" alt="alternative"></a>
                         </div>
                         <div class="element-item">
                             <p class="cost" hidden><span th:text="${rankCost[1]}"></span></p>
                             <p class="carbon" hidden><span th:text="${rankCarbon[1]}"></span></p>
                             <p class="time" hidden><span th:text="${rankTime[1]}"></span></p>
-                            <a class="popup-with-move-anim" href="#project-3"><div class="element-item-overlay"><span>BUS</span></div><img src="../images/project-3.jpg" alt="alternative"></a>
+                            <a class="popup-with-move-anim" href="#TRANSIT-OPTION"><div class="element-item-overlay"><span>BUS</span></div><img src="../images/project-3.jpg" alt="alternative"></a>
                         </div>
                         <div class="element-item">
                             <p class="cost" hidden>200000000</p>
                             <p class="carbon" hidden>200000000</p>
                             <p class="time" hidden>200000000</p>
-                            <a class="popup-with-move-anim" href="#project-4"><div class="element-item-overlay"><span>SHUTTLE</span></div><img src="../images/project-4.jpg" alt="alternative"></a>
+                            <a class="popup-with-move-anim" href="#SHUTTLE-OPTION"><div class="element-item-overlay"><span>SHUTTLE</span></div><img src="../images/project-4.jpg" alt="alternative"></a>
                         </div>
                         <div class="element-item">
                             <p class="cost" hidden><span th:text="${rankCost[2]}"></span></p>
                             <p class="carbon" hidden><span th:text="${rankCarbon[2]}"></span></p>
                             <p class="time" hidden><span th:text="${rankTime[2]}"></span></p>
-                            <a class="popup-with-move-anim" href="#project-5"><div class="element-item-overlay"><span>BIKING</span></div><img src="../images/project-5.jpg" alt="alternative"></a>
+                            <a class="popup-with-move-anim" href="#BIKE-OPTION"><div class="element-item-overlay"><span>BIKING</span></div><img src="../images/project-5.jpg" alt="alternative"></a>
                         </div>
                         <div class="element-item">
                             <p class="cost" hidden><span th:text="${rankCost[3]}"></span></p>
                             <p class="carbon" hidden><span th:text="${rankCarbon[3]}"></span></p>
                             <p class="time" hidden><span th:text="${rankTime[3]}"></span></p>
-                            <a class="popup-with-move-anim" href="#project-6"><div class="element-item-overlay"><span>WALKING</span></div><img src="../images/project-6.jpg" alt="alternative"></a>
+                            <a class="popup-with-move-anim" href="#WALKING-OPTION"><div class="element-item-overlay"><span>WALKING</span></div><img src="../images/project-6.jpg" alt="alternative"></a>
                         </div>
                     </div> <!-- end of grid -->
                     <!-- end of filter -->
@@ -113,15 +113,20 @@
 
     <!-- Project Lightboxes -->
     <!-- Lightbox FOR CAR-->
-    <div id="project-1" class="lightbox-basic zoom-anim-dialog mfp-hide">
+    <div id="CAR-OPTION" class="lightbox-basic zoom-anim-dialog mfp-hide">
         <div class="row">
             <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
             <div class="col-lg-8">
                 <!--<img class="img-fluid" src="../images/project-1.jpg" alt="alternative">-->
                 <!--Google map-->
                 <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
-                  <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
-                    style="border:0" allowfullscreen></iframe>
+                    <iframe
+                    width="600"
+                    height="450"
+                    frameborder="0" style="border:0"
+                    th:attr="src=${mapURLForCar}"
+                    allowfullscreen>
+                  </iframe>
                 </div>
                 <!--Google Maps-->
             </div> <!-- end of col -->
@@ -139,7 +144,7 @@
     <!-- end of lightbox -->
 
     <!-- Lightbox -->
-    <div id="project-2" class="lightbox-basic zoom-anim-dialog mfp-hide">
+    <div id="CARPOOL-OPTION" class="lightbox-basic zoom-anim-dialog mfp-hide">
         <div class="row">
             <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
             <div class="col-lg-8">
@@ -165,21 +170,26 @@
     <!-- end of lightbox -->
 
     <!-- Lightbox -->
-    <div id="project-3" class="lightbox-basic zoom-anim-dialog mfp-hide">
+    <div id="TRANSIT-OPTION" class="lightbox-basic zoom-anim-dialog mfp-hide">
         <div class="row">
             <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
             <div class="col-lg-8">
                 <!--<img class="img-fluid" src="../images/project-3.jpg" alt="alternative">-->
                 <!--Google map-->
                 <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
-                  <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
-                    style="border:0" allowfullscreen></iframe>
+                    <iframe
+                    width="600"
+                    height="450"
+                    frameborder="0" style="border:0"
+                    th:attr="src=${mapURLForTransit}"
+                    allowfullscreen>
+                  </iframe>
                 </div>
                 <!--Google Maps-->
             </div> <!-- end of col -->
             <div class="col-lg-4">
                 <hr class="line-heading">
-                <h3>BUS</h3>
+                <h3>SAC TRANSIT</h3>
                 <hr class="line-heading">
                 <p>Details:</p>
                 <p>Need a solid foundation for your business growth plans? Aria will help you manage sales and meet your current needs</p>
@@ -191,7 +201,7 @@
     <!-- end of lightbox -->
 
     <!-- Lightbox -->
-    <div id="project-4" class="lightbox-basic zoom-anim-dialog mfp-hide">
+    <div id="SHUTTLE-OPTION" class="lightbox-basic zoom-anim-dialog mfp-hide">
         <div class="row">
             <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
             <div class="col-lg-8">
@@ -217,15 +227,20 @@
     <!-- end of lightbox -->
 
     <!-- Lightbox -->
-    <div id="project-5" class="lightbox-basic zoom-anim-dialog mfp-hide">
+    <div id="BIKE-OPTION" class="lightbox-basic zoom-anim-dialog mfp-hide">
         <div class="row">
             <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
             <div class="col-lg-8">
                 <!--<img class="img-fluid" src="../images/project-5.jpg" alt="alternative">-->
                 <!--Google map-->
                 <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
-                  <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
-                    style="border:0" allowfullscreen></iframe>
+                    <iframe
+                    width="600"
+                    height="450"
+                    frameborder="0" style="border:0"
+                    th:attr="src=${mapURLForBike}"
+                    allowfullscreen>
+                  </iframe>
                 </div>
                 <!--Google Maps-->
             </div> <!-- end of col -->
@@ -243,15 +258,20 @@
     <!-- end of lightbox -->
 
     <!-- Lightbox -->
-    <div id="project-6" class="lightbox-basic zoom-anim-dialog mfp-hide">
+    <div id="WALKING-OPTION" class="lightbox-basic zoom-anim-dialog mfp-hide">
         <div class="row">
             <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
             <div class="col-lg-8">
                 <!--<img class="img-fluid" src="../images/project-6.jpg" alt="alternative">-->
                 <!--Google map-->
                 <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
-                  <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
-                    style="border:0" allowfullscreen></iframe>
+                    <iframe
+                    width="600"
+                    height="450"
+                    frameborder="0" style="border:0"
+                    th:attr="src=${mapURLForWalk}"
+                    allowfullscreen>
+                  </iframe>
                 </div>
                 <!--Google Maps-->
             </div> <!-- end of col -->
