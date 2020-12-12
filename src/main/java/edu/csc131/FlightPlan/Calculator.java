@@ -1,11 +1,20 @@
 package edu.csc131.FlightPlan;
+
+import java.io.File; 
+import java.io.FileInputStream; 
+import java.io.FileNotFoundException; 
+import java.io.IOException; 
+import org.apache.poi.xssf.usermodel.XSSFSheet; 
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+
 /**
  * Calculates the total cost/carbon emission of a trip for given transportation mode
  * Should read and store cost/carbon for mile for each mode
  */
 public class Calculator { //this is pretty useless. Being able to multiply is sure a difficult function to create
    //Car
-   private int carbon_per_gallon_fuel=8887; //number in grams. must convert to pounds using conversion rate
+   private double carbon_per_gallon_fuel=8887; //number in grams. must convert to pounds using conversion rate
    private double grams_to_lbs_conversion_rate=0.00220462;
    private double cost_per_gallon_fuel=3.50;
 
@@ -22,6 +31,42 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
    private int weeks_per_semester=16;                 /* check on this info */
    private int cost_parking_pass_per_semester=170;
    private int cost_parking_pass_per_trip=5;
+
+   
+   Calculator() {
+      try {
+         File excel = new File("src/main/resources/CarbonCostData.xlsx");
+         FileInputStream stream = new FileInputStream(excel);
+         XSSFWorkbook book = new XSSFWorkbook(stream);
+         XSSFSheet sheet = book.getSheetAt(0);
+         carbon_per_gallon_fuel = sheet.getRow(0).getCell(1).getNumericCellValue();
+         grams_to_lbs_conversion_rate = sheet.getRow(1).getCell(1).getNumericCellValue();
+         cost_per_gallon_fuel = sheet.getRow(2).getCell(1).getNumericCellValue();
+         bike_cost_per_mile = sheet.getRow(3).getCell(1).getNumericCellValue();
+         bike_c02_per_mile = sheet.getRow(4).getCell(1).getNumericCellValue();
+         transit_cost_per_mile = sheet.getRow(5).getCell(1).getNumericCellValue();
+         transit_c02_per_mile = sheet.getRow(6).getCell(1).getNumericCellValue();
+         walk_cost_per_mile = sheet.getRow(7).getCell(1).getNumericCellValue();
+         walk_c02_per_mile = sheet.getRow(8).getCell(1).getNumericCellValue();
+         weeks_per_semester = (int) sheet.getRow(9).getCell(1).getNumericCellValue();
+         cost_parking_pass_per_semester = (int) sheet.getRow(10).getCell(1).getNumericCellValue();
+         cost_parking_pass_per_trip = (int) sheet.getRow(11).getCell(1).getNumericCellValue();
+         System.out.println("OPENED! IT'S WORKING!");
+         book.close();
+      }
+      catch (FileNotFoundException e) {
+
+      }
+      catch (IOException e) {
+
+      }
+      finally {
+
+      }
+      
+      
+   }
+
 
    /**
     * Calculate cost of total trip by vehicle type.
