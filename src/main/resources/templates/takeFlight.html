@@ -60,28 +60,45 @@
                 <div class="col-lg-12">
                     <!-- Filter -->
                     <div class="button-group filters-button-group">
-                        <a class="button is-checked" data-filter="*"><span>SHOW ALL</span></a>
-                        <a class="button" data-filter=".time"><span>TIME</span></a>
-                        <a class="button" data-filter=".cost"><span>COST</span></a>
-                        <a class="button" data-filter=".carbon"><span>CARBON</span></a>
+                        <a class="button is-checked" data-filter="time"><span>TIME</span></a>
+                        <a class="button" data-filter="cost"><span>COST</span></a>
+                        <a class="button" data-filter="carbon"><span>CARBON</span></a>
                     </div> <!-- end of button group -->
                     <div class="grid">
-                        <div class="element-item time">
+                        <div class="element-item">
+                            <p class="cost" hidden><span th:text="${rankCost[0]}"></span></p>
+                            <p class="carbon" hidden><span th:text="${rankCarbon[0]}"></span></p>
+                            <p class="time" hidden><span th:text="${rankTime[0]}"></span></p>
                             <a class="popup-with-move-anim" href="#project-1"><div class="element-item-overlay"><span>CAR</span></div><img src="../images/project-1.jpg" alt="alternative"></a>
                         </div>
-                        <div class="element-item time">
+                        <div class="element-item">
+                            <p class="cost" hidden>100000000</p>
+                            <p class="carbon" hidden>100000000</p>
+                            <p class="time" hidden>100000000</p>
                             <a class="popup-with-move-anim" href="#project-2"><div class="element-item-overlay"><span>CARPOOL</span></div><img src="../images/project-2.jpg" alt="alternative"></a>
                         </div>
-                        <div class="element-item cost carbon">
+                        <div class="element-item">
+                            <p class="cost" hidden><span th:text="${rankCost[1]}"></span></p>
+                            <p class="carbon" hidden><span th:text="${rankCarbon[1]}"></span></p>
+                            <p class="time" hidden><span th:text="${rankTime[1]}"></span></p>
                             <a class="popup-with-move-anim" href="#project-3"><div class="element-item-overlay"><span>BUS</span></div><img src="../images/project-3.jpg" alt="alternative"></a>
                         </div>
-                        <div class="element-item cost time carbon">
+                        <div class="element-item">
+                            <p class="cost" hidden>200000000</p>
+                            <p class="carbon" hidden>200000000</p>
+                            <p class="time" hidden>200000000</p>
                             <a class="popup-with-move-anim" href="#project-4"><div class="element-item-overlay"><span>SHUTTLE</span></div><img src="../images/project-4.jpg" alt="alternative"></a>
                         </div>
-                        <div class="element-item cost time carbon">
+                        <div class="element-item">
+                            <p class="cost" hidden><span th:text="${rankCost[2]}"></span></p>
+                            <p class="carbon" hidden><span th:text="${rankCarbon[2]}"></span></p>
+                            <p class="time" hidden><span th:text="${rankTime[2]}"></span></p>
                             <a class="popup-with-move-anim" href="#project-5"><div class="element-item-overlay"><span>BIKING</span></div><img src="../images/project-5.jpg" alt="alternative"></a>
                         </div>
-                        <div class="element-item time carbon">
+                        <div class="element-item">
+                            <p class="cost" hidden><span th:text="${rankCost[3]}"></span></p>
+                            <p class="carbon" hidden><span th:text="${rankCarbon[3]}"></span></p>
+                            <p class="time" hidden><span th:text="${rankTime[3]}"></span></p>
                             <a class="popup-with-move-anim" href="#project-6"><div class="element-item-overlay"><span>WALKING</span></div><img src="../images/project-6.jpg" alt="alternative"></a>
                         </div>
                     </div> <!-- end of grid -->
@@ -95,7 +112,7 @@
 
 
     <!-- Project Lightboxes -->
-    <!-- Lightbox -->
+    <!-- Lightbox FOR CAR-->
     <div id="project-1" class="lightbox-basic zoom-anim-dialog mfp-hide">
         <div class="row">
             <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
