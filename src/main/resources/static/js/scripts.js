@@ -107,7 +107,7 @@
 
     // SORT items on button click
     $('.filters-button-group').on('click', 'a', function () {
-        var sortByValue = $(this).attr('data-filter');
+        var sortByValue = $(this).attr('data-sort');
         $grid.isotope({ sortBy: sortByValue });
     });
 
