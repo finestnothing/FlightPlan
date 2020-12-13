@@ -8,9 +8,14 @@ public class ModeFilter {
     private Boolean isBikeFilterd = false;
     private Boolean isCarpoolFilterd = false;
 
-    public ModeFilter(Double transitDistance){
+    public ModeFilter(Double transitDistance, Double walkDistance){
         if(transitDistance<0){
             isTransitFilterd = true;
+        }
+        System.out.println("Walk Dist "+walkDistance);
+        if(walkDistance>9000){
+            IsWalkFilterd = true;
+            isShuttelFilterd = true;
         }
     }
 

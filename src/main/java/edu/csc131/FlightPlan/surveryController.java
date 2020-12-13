@@ -166,7 +166,7 @@ public class surveryController {
                                         +userData.getAddress().replace(" ", "+")+"&destination=6000+J+St,+Sacramento,+CA+95819&mode=bicycling");
 
     //Filters for the cards
-    ModeFilter filter = new ModeFilter(userData.getTravelTimeByTransit());
+    ModeFilter filter = new ModeFilter(userData.getTravelTimeByTransit(), userData.getTravelDistanceByWalking());
     model.addAttribute("isCarFilterd", filter.getIsCarFilterd());
     model.addAttribute("isTransitFilterd", filter.getIsTransitFilterd());
     model.addAttribute("isShuttelFilterd", filter.getIsShuttelFilterd());
