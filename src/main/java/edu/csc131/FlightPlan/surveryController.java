@@ -62,6 +62,7 @@ public class surveryController {
     double travelTimeByWalk = Double.parseDouble(time.getTimeByWalking());
     double travelTimeByTransit = Double.parseDouble(time.getTimeByTransportation());
     double travelTimeByBike = Double.parseDouble(time.getTimeByBike());
+    System.out.println("HEREisIt:"+travelTimeByBike);
 
     //Get Distance
     double travelDistanceByCar = Double.parseDouble(time.getDistanceByCar());
@@ -74,7 +75,7 @@ public class surveryController {
          String carType = "Sedan";
    
       //Creates Ranking object
-         Ranking r = new Ranking(travelDistanceByWalking, travelTimeByWalk, travelDistanceByBike, travelDistanceByBike,
+         Ranking r = new Ranking(travelDistanceByWalking, travelTimeByWalk, travelDistanceByBike, travelTimeByBike,
                                  travelDistanceByTransit, travelTimeByTransit, travelDistanceByCar, travelTimeByCar, carType);
          
          
