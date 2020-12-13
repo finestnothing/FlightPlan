@@ -99,3 +99,12 @@ $(".previous").click(function(){
 //$(".submit").click(function(){
 //	return false;
 //})
+
+//for slider **from W3Schools**
+var fuelEconomySlider = document.getElementById("fuelEconomy");
+var output = document.getElementById("sliderInput");
+output.innerHTML = fuelEconomySlider.value;
+
+fuelEconomySlider.oninput = function() {
+	output.innerHTML = this.value;
+                    }

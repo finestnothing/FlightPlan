@@ -51,7 +51,7 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
          weeks_per_semester = (int) sheet.getRow(9).getCell(1).getNumericCellValue();
          cost_parking_pass_per_semester = (int) sheet.getRow(10).getCell(1).getNumericCellValue();
          cost_parking_pass_per_trip = (int) sheet.getRow(11).getCell(1).getNumericCellValue();
-         System.out.println("OPENED! IT'S WORKING!");
+         System.out.println("Hello worrld");
          book.close();
       }
       catch (FileNotFoundException e) {

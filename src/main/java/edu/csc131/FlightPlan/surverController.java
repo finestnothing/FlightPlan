@@ -42,7 +42,7 @@ public class surverController {
    * @return Forward to Get mapped function.
    */
   @PostMapping(path = "/takeFlight") // Map ONLY POST Requests
-  public String saveData(@RequestParam String address, @RequestParam("rank") String preferredRank, @RequestParam("email") String email) {
+  public String saveData(@RequestParam String address, @RequestParam("fuelEconomy") int fuelEconomy, @RequestParam("email") String email) {
     // @RequestParam means it is a parameter from the GET or POST request. Here we
     // are using POST.
 
@@ -68,14 +68,10 @@ public class surverController {
     double travelDistanceByWalking = Double.parseDouble(time.getDistanceByWalking());
     double travelDistanceByTransit = Double.parseDouble(time.getDistanceByTransportation());
     double travelDistanceByBike = Double.parseDouble(time.getDistanceByBike());
-
-    //Hard-coded input
-
-         int carMPG = 25;
    
       //Creates Ranking object
          Ranking r = new Ranking(travelDistanceByWalking, travelTimeByWalk, travelDistanceByBike, travelDistanceByBike,
-                                 travelDistanceByTransit, travelTimeByTransit, travelDistanceByCar, travelTimeByCar, carMPG);
+                                 travelDistanceByTransit, travelTimeByTransit, travelDistanceByCar, travelTimeByCar, fuelEconomy);
          
          
       /* NOTE:
@@ -88,7 +84,7 @@ public class surverController {
       */ 
     userData.setUserEmail(email);
     userData.setAddress(address);
-    userData.setPreferredRank(preferredRank);
+    //userData.setPreferredRank(preferredRank);
 
     userData.settravelTimeByCar(travelTimeByCar);
     userData.setTravelTimeByWalking(travelTimeByWalk);
