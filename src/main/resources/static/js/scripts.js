@@ -5,66 +5,66 @@
 */
 
 
-(function($) {
-    "use strict"; 
-	
-	/* Preloader */
-	$(window).on('load', function() {
-		var preloaderFadeOutTime = 500;
-		function hidePreloader() {
-			var preloader = $('.spinner-wrapper');
-			setTimeout(function() {
-				preloader.fadeOut(preloaderFadeOutTime);
-			}, 500);
-		}
-		hidePreloader();
-	});
+(function ($) {
+    "use strict";
 
-	// jQuery for page scrolling feature - requires jQuery Easing plugin
-	$(function() {
-		$(document).on('click', 'a.page-scroll', function(event) {
-			var $anchor = $(this);
-			$('html, body').stop().animate({
-				scrollTop: $($anchor.attr('href')).offset().top
-			}, 600, 'easeInOutExpo');
-			event.preventDefault();
-		});
-	});
+    /* Preloader */
+    $(window).on('load', function () {
+        var preloaderFadeOutTime = 500;
+        function hidePreloader() {
+            var preloader = $('.spinner-wrapper');
+            setTimeout(function () {
+                preloader.fadeOut(preloaderFadeOutTime);
+            }, 500);
+        }
+        hidePreloader();
+    });
+
+    // jQuery for page scrolling feature - requires jQuery Easing plugin
+    $(function () {
+        $(document).on('click', 'a.page-scroll', function (event) {
+            var $anchor = $(this);
+            $('html, body').stop().animate({
+                scrollTop: $($anchor.attr('href')).offset().top
+            }, 600, 'easeInOutExpo');
+            event.preventDefault();
+        });
+    });
 
     // closes the responsive menu on menu item click
-    $(".navbar-nav li a").on("click", function(event) {
-    if (!$(this).parent().hasClass('dropdown'))
-        $(".navbar-collapse").collapse('hide');
+    $(".navbar-nav li a").on("click", function (event) {
+        if (!$(this).parent().hasClass('dropdown'))
+            $(".navbar-collapse").collapse('hide');
     });
 
 
     /* Rotating Text - Morphtext */
-	$("#js-rotating").Morphext({
-		// The [in] animation type. Refer to Animate.css for a list of available animations.
-		animation: "fadeIn",
-		// An array of phrases to rotate are created based on this separator. Change it if you wish to separate the phrases differently (e.g. So Simple | Very Doge | Much Wow | Such Cool).
-		separator: ",",
-		// The delay between the changing of each phrase in milliseconds.
-		speed: 2000,
-		complete: function () {
-			// Called after the entrance animation is executed.
-		}
+    $("#js-rotating").Morphext({
+        // The [in] animation type. Refer to Animate.css for a list of available animations.
+        animation: "fadeIn",
+        // An array of phrases to rotate are created based on this separator. Change it if you wish to separate the phrases differently (e.g. So Simple | Very Doge | Much Wow | Such Cool).
+        separator: ",",
+        // The delay between the changing of each phrase in milliseconds.
+        speed: 2000,
+        complete: function () {
+            // Called after the entrance animation is executed.
+        }
     });
-    
+
 
     /* Card Slider - Swiper */
-	var cardSlider = new Swiper('.card-slider', {
-		autoplay: {
+    var cardSlider = new Swiper('.card-slider', {
+        autoplay: {
             delay: 4000,
             disableOnInteraction: false
-		},
+        },
         loop: true,
         navigation: {
-			nextEl: '.swiper-button-next',
-			prevEl: '.swiper-button-prev'
-		},
-		slidesPerView: 3,
-		spaceBetween: 20,
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+        },
+        slidesPerView: 3,
+        spaceBetween: 20,
         breakpoints: {
             // when window is <= 992px
             992: {
@@ -73,24 +73,24 @@
             // when window is <= 768px
             768: {
                 slidesPerView: 1
-            } 
+            }
         }
     });
 
-    
+
     /* Lightbox - Magnific Popup */
-	$('.popup-with-move-anim').magnificPopup({
-		type: 'inline',
-		fixedContentPos: false, /* keep it false to avoid html tag shift with margin-right: 17px */
-		fixedBgPos: true,
-		overflowY: 'auto',
-		closeBtnInside: true,
-		preloader: false,
-		midClick: true,
-		removalDelay: 300,
-		mainClass: 'my-mfp-slide-bottom'
+    $('.popup-with-move-anim').magnificPopup({
+        type: 'inline',
+        fixedContentPos: false, /* keep it false to avoid html tag shift with margin-right: 17px */
+        fixedBgPos: true,
+        overflowY: 'auto',
+        closeBtnInside: true,
+        preloader: false,
+        midClick: true,
+        removalDelay: 300,
+        mainClass: 'my-mfp-slide-bottom'
     });
-    
+
 
     /* Filter - Isotope */
     var $grid = $('.grid').isotope({
@@ -101,72 +101,83 @@
             cost: '.cost parseFloat',
             carbon: '.carbon parseFloat',
             time: '.time parseFloat'
-        }
+        },
+        filter: function() {
+            // _this_ is the item element. Get text of element's .number
+            var isFilterd = $(this).find('.isFilterd').text();
+            // return true to show, false to hide
+            return isFilterd == "false";
+          }
 
     });
-    
+
     // SORT items on button click
-    $('.filters-button-group').on( 'click', 'a', function() {
-        var sortByValue = $(this).attr('data-filter');
+    $('.filters-button-group').on('click', 'a', function () {
+        var sortByValue = $(this).attr('data-sort');
         $grid.isotope({ sortBy: sortByValue });
     });
-    
+
     // change is-checked class on buttons
-    $('.button-group').each( function( i, buttonGroup ) {
-        var $buttonGroup = $( buttonGroup );
-        $buttonGroup.on( 'click', 'a', function() {
+    $('.button-group').each(function (i, buttonGroup) {
+        var $buttonGroup = $(buttonGroup);
+        $buttonGroup.on('click', 'a', function () {
             $buttonGroup.find('.is-checked').removeClass('is-checked');
-            $( this ).addClass('is-checked');
-        });	
+            $(this).addClass('is-checked');
+        });
     });
-    
+
+    // sort by time on page load. 
+    $(document).ready(function () {
+        $grid.isotope({ sortBy: "time" });
+    });
+
 
     /* Counter - CountTo */
-	var a = 0;
-	$(window).scroll(function() {
-		if ($('#counter').length) { // checking if CountTo section exists in the page, if not it will not run the script and avoid errors	
-			var oTop = $('#counter').offset().top - window.innerHeight;
-			if (a == 0 && $(window).scrollTop() > oTop) {
-			$('.counter-value').each(function() {
-				var $this = $(this),
-				countTo = $this.attr('data-count');
-				$({
-				countNum: $this.text()
-				}).animate({
-					countNum: countTo
-				},
-				{
-					duration: 2000,
-					easing: 'swing',
-					step: function() {
-					$this.text(Math.floor(this.countNum));
-					},
-					complete: function() {
-					$this.text(this.countNum);
-					//alert('finished');
-					}
-				});
-			});
-			a = 1;
-			}
-		}
+    var a = 0;
+    $(window).scroll(function () {
+        if ($('#counter').length) { // checking if CountTo section exists in the page, if not it will not run the script and avoid errors	
+            var oTop = $('#counter').offset().top - window.innerHeight;
+            if (a == 0 && $(window).scrollTop() > oTop) {
+                $('.counter-value').each(function () {
+                    var $this = $(this),
+                        countTo = $this.attr('data-count');
+                    $({
+                        countNum: $this.text()
+                    }).animate({
+                        countNum: countTo
+                    },
+                        {
+                            duration: 2000,
+                            easing: 'swing',
+                            step: function () {
+                                $this.text(Math.floor(this.countNum));
+                            },
+                            complete: function () {
+                                $this.text(this.countNum);
+                                //alert('finished');
+                            }
+                        });
+                });
+                a = 1;
+            }
+        }
     });
 
 
     /* Move Form Fields Label When User Types */
     // for input and textarea fields
-    $("input, textarea").keyup(function(){
-		if ($(this).val() != '') {
-			$(this).addClass('notEmpty');
-		} else {
-			$(this).removeClass('notEmpty');
-		}
+    $("input, textarea").keyup(function () {
+        if ($(this).val() != '') {
+            $(this).addClass('notEmpty');
+        } else {
+            $(this).removeClass('notEmpty');
+        }
     });
 
 
     /* Call Me Form */
-    $("#callMeForm").validator().on("submit", function(event) {
-    	if (event.isDefaultPrevented()) {
+    $("#callMeForm").validator().on("submit", function (event) {
+        if (event.isDefaultPrevented()) {
             // handle the invalid form...
             lformError();
             lsubmitMSG(false, "Please fill all fields!");
@@ -179,17 +190,17 @@
 
     function lsubmitForm() {
         // initiate variables with form content
-		var name = $("#lname").val();
-		var phone = $("#lphone").val();
-		var email = $("#lemail").val();
-		var select = $("#lselect").val();
+        var name = $("#lname").val();
+        var phone = $("#lphone").val();
+        var email = $("#lemail").val();
+        var select = $("#lselect").val();
         var terms = $("#lterms").val();
-        
+
         $.ajax({
             type: "POST",
             url: "php/callmeform-process.php",
-            data: "name=" + name + "&phone=" + phone + "&email=" + email + "&select=" + select + "&terms=" + terms, 
-            success: function(text) {
+            data: "name=" + name + "&phone=" + phone + "&email=" + email + "&select=" + select + "&terms=" + terms,
+            success: function (text) {
                 if (text == "success") {
                     lformSuccess();
                 } else {
@@ -198,7 +209,7 @@
                 }
             }
         });
-	}
+    }
 
     function lformSuccess() {
         $("#callMeForm")[0].reset();
@@ -207,10 +218,10 @@
     }
 
     function lformError() {
-        $("#callMeForm").removeClass().addClass('shake animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+        $("#callMeForm").removeClass().addClass('shake animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
             $(this).removeClass();
         });
-	}
+    }
 
     function lsubmitMSG(valid, msg) {
         if (valid) {
@@ -223,8 +234,8 @@
 
 
     /* Contact Form */
-    $("#contactForm").validator().on("submit", function(event) {
-    	if (event.isDefaultPrevented()) {
+    $("#contactForm").validator().on("submit", function (event) {
+        if (event.isDefaultPrevented()) {
             // handle the invalid form...
             cformError();
             csubmitMSG(false, "Please fill all fields!");
@@ -237,15 +248,15 @@
 
     function csubmitForm() {
         // initiate variables with form content
-		var name = $("#cname").val();
-		var email = $("#cemail").val();
+        var name = $("#cname").val();
+        var email = $("#cemail").val();
         var message = $("#cmessage").val();
         var terms = $("#cterms").val();
         $.ajax({
             type: "POST",
             url: "php/contactform-process.php",
-            data: "name=" + name + "&email=" + email + "&message=" + message + "&terms=" + terms, 
-            success: function(text) {
+            data: "name=" + name + "&email=" + email + "&message=" + message + "&terms=" + terms,
+            success: function (text) {
                 if (text == "success") {
                     cformSuccess();
                 } else {
@@ -254,7 +265,7 @@
                 }
             }
         });
-	}
+    }
 
     function cformSuccess() {
         $("#contactForm")[0].reset();
@@ -264,10 +275,10 @@
     }
 
     function cformError() {
-        $("#contactForm").removeClass().addClass('shake animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+        $("#contactForm").removeClass().addClass('shake animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
             $(this).removeClass();
         });
-	}
+    }
 
     function csubmitMSG(valid, msg) {
         if (valid) {
@@ -280,8 +291,8 @@
 
 
     /* Privacy Form */
-    $("#privacyForm").validator().on("submit", function(event) {
-    	if (event.isDefaultPrevented()) {
+    $("#privacyForm").validator().on("submit", function (event) {
+        if (event.isDefaultPrevented()) {
             // handle the invalid form...
             pformError();
             psubmitMSG(false, "Please fill all fields!");
@@ -294,16 +305,16 @@
 
     function psubmitForm() {
         // initiate variables with form content
-		var name = $("#pname").val();
-		var email = $("#pemail").val();
+        var name = $("#pname").val();
+        var email = $("#pemail").val();
         var select = $("#pselect").val();
         var terms = $("#pterms").val();
-        
+
         $.ajax({
             type: "POST",
             url: "php/privacyform-process.php",
-            data: "name=" + name + "&email=" + email + "&select=" + select + "&terms=" + terms, 
-            success: function(text) {
+            data: "name=" + name + "&email=" + email + "&select=" + select + "&terms=" + terms,
+            success: function (text) {
                 if (text == "success") {
                     pformSuccess();
                 } else {
@@ -312,7 +323,7 @@
                 }
             }
         });
-	}
+    }
 
     function pformSuccess() {
         $("#privacyForm")[0].reset();
@@ -321,10 +332,10 @@
     }
 
     function pformError() {
-        $("#privacyForm").removeClass().addClass('shake animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+        $("#privacyForm").removeClass().addClass('shake animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
             $(this).removeClass();
         });
-	}
+    }
 
     function psubmitMSG(valid, msg) {
         if (valid) {
@@ -336,9 +347,9 @@
     }
 
 
-	/* Removes Long Focus On Buttons */
-	$(".button, a, button").mouseup(function() {
-		$(this).blur();
-	});
+    /* Removes Long Focus On Buttons */
+    $(".button, a, button").mouseup(function () {
+        $(this).blur();
+    });
 
 })(jQuery);

@@ -75,7 +75,7 @@ public class surveryController {
     double travelDistanceByBike = Double.parseDouble(time.getDistanceByBike());
 
       //Creates Ranking object
-         Ranking r = new Ranking(travelDistanceByWalking, travelTimeByWalk, travelDistanceByBike, travelDistanceByBike,
+         Ranking r = new Ranking(travelDistanceByWalking, travelTimeByWalk, travelDistanceByBike, travelTimeByBike,
                                  travelDistanceByTransit, travelTimeByTransit, travelDistanceByCar, travelTimeByCar, travelTimeByCarpool, travelDistanceByCarpool, travelTimeByShuttle, travelDistanceByShuttle, fuelEconomy);
 
 
@@ -124,7 +124,7 @@ public class surveryController {
    */
   @GetMapping(path = "/results")
   public String getResults(Model model) {
-    // ModelAndView mv = new ModelAndView();
+
     model.addAttribute("address", userData.getAddress());
 
     model.addAttribute("travelTimeByCar", userData.gettravelTimeByCar());
@@ -165,7 +165,17 @@ public class surveryController {
     model.addAttribute("mapURLForBike", "https://www.google.com/maps/embed/v1/directions?key="+googleWebAPIKEY+"&origin="
                                         +userData.getAddress().replace(" ", "+")+"&destination=6000+J+St,+Sacramento,+CA+95819&mode=bicycling");
 
+    //Filters for the cards
+    ModeFilter filter = new ModeFilter(userData.getTravelTimeByTransit(), userData.getTravelDistanceByWalking());
+    model.addAttribute("isCarFilterd", filter.getIsCarFilterd());
+    model.addAttribute("isTransitFilterd", filter.getIsTransitFilterd());
+    model.addAttribute("isShuttelFilterd", filter.getIsShuttelFilterd());
+    model.addAttribute("IsWalkFilterd", filter.getIsWalkFilterd());
+    model.addAttribute("isBikeFilterd", filter.getIsBikeFilterd());
+    model.addAttribute("isCarpoolFilterd", filter.getIsCarpoolFilterd());
+
 
     return "/takeFlight.html";
   }
+
 }

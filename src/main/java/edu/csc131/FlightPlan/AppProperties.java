@@ -1,4 +1,4 @@
-package edu.csc131;
+package edu.csc131.FlightPlan;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
