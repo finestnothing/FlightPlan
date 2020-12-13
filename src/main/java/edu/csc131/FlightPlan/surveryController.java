@@ -75,7 +75,7 @@ public class surveryController {
     double travelDistanceByBike = Double.parseDouble(time.getDistanceByBike());
 
       //Creates Ranking object
-         Ranking r = new Ranking(travelDistanceByWalking, travelTimeByWalk, travelDistanceByBike, travelDistanceByBike,
+         Ranking r = new Ranking(travelDistanceByWalking, travelTimeByWalk, travelDistanceByBike, travelTimeByBike,
                                  travelDistanceByTransit, travelTimeByTransit, travelDistanceByCar, travelTimeByCar, travelTimeByCarpool, travelDistanceByCarpool, travelTimeByShuttle, travelDistanceByShuttle, fuelEconomy);
 
 
