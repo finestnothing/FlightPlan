@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * contains the post and get methods. We are using Spring. It is a framework
  * that heavely uses anotations to do a lot of fancy things, really rather
  * easiely.
- * 
+ *
  * @author ingrumm
  */
 @Controller // This means that this class is a Controller
@@ -35,20 +35,20 @@ public class surveryController {
 
   /**
    * All params are from request attrbutes.
-   * 
+   *
    * @param address
    * @param mpg
    * @param email
    * @return Forward to Get mapped function.
    */
   @PostMapping(path = "/takeFlight") // Map ONLY POST Requests
-  public String saveData(@RequestParam String address, @RequestParam("rank") String preferredRank, @RequestParam("email") String email) {
+  public String saveData(@RequestParam String address, @RequestParam("fuelEconomy") int fuelEconomy, @RequestParam("email") String email) {
     // @RequestParam means it is a parameter from the GET or POST request. Here we
     // are using POST.
 
     // Creates a TimeTo object. This class will give us the time to a destnation.
     // We can also add functionality to get distance as well.
-    
+
     TimeTo time;
     try {
       time = new TimeTo(address, googleServerSideAPIKEY);
@@ -70,26 +70,22 @@ public class surveryController {
     double travelDistanceByTransit = Double.parseDouble(time.getDistanceByTransportation());
     double travelDistanceByBike = Double.parseDouble(time.getDistanceByBike());
 
-    //Hard-coded input
-
-         String carType = "Sedan";
-   
       //Creates Ranking object
-         Ranking r = new Ranking(travelDistanceByWalking, travelTimeByWalk, travelDistanceByBike, travelTimeByBike,
-                                 travelDistanceByTransit, travelTimeByTransit, travelDistanceByCar, travelTimeByCar, carType);
-         
-         
+         Ranking r = new Ranking(travelDistanceByWalking, travelTimeByWalk, travelDistanceByBike, travelDistanceByBike,
+                                 travelDistanceByTransit, travelTimeByTransit, travelDistanceByCar, travelTimeByCar, fuelEconomy);
+
+
       /* NOTE:
       Array itself is not sorted so Alec can tag them and rank them as he said in the meeting
       Below: Sample Ranking Output based on arbitary scores Justin created in TransportMode.java:
-         
+
       double[] ranked_by_whatever = r.rank_all();
          for (double each : ranked_by_whatever)
             System.out.println(each);
-      */ 
+      */
     userData.setUserEmail(email);
     userData.setAddress(address);
-    userData.setPreferredRank(preferredRank);
+    //userData.setPreferredRank(preferredRank);
 
     userData.settravelTimeByCar(travelTimeByCar);
     userData.setTravelTimeByWalking(travelTimeByWalk);
@@ -113,10 +109,10 @@ public class surveryController {
   }
 
   /**
-   * 
+   *
    * @param model
    * @return Returns the View called takeFlight.html
-   * 
+   *
    *         We set can add attrbutes to the model here. Thymeleaf then parses our
    *         html file, and replaces the corrasponding variables. We can also do
    *         this with a jsp file instead og an htm file. That gives us more toys,
@@ -164,8 +160,8 @@ public class surveryController {
 
     model.addAttribute("mapURLForBike", "https://www.google.com/maps/embed/v1/directions?key="+googleWebAPIKEY+"&origin="
                                         +userData.getAddress().replace(" ", "+")+"&destination=6000+J+St,+Sacramento,+CA+95819&mode=bicycling");
-    
-    
-    return "/takeFlight.html"; 
+
+
+    return "/takeFlight.html";
   }
 }

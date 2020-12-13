@@ -67,7 +67,7 @@
             <!-- progressbar -->
             <ul id="progressbar">
                 <li class="active">Address</li>
-                <li>Ranking</li>
+                <li>Vehicle</li>
                 <li>Email</li>
             </ul>
             <!-- fieldsets -->
@@ -79,13 +79,12 @@
                 <input type="button" name="next" class="next action-button" value="Next" />
             </fieldset>
             <fieldset>
-                <h2 class="fs-title">Ranking Preference</h2>
-                <h3 class="fs-subtitle">How Would You Like To Rank Your Results</h3>
-                <select id="rank" name="rank" > 
-                    <option value="cost">Cost</option>
-                    <option value="carbon">Carbon</option>
-                    <option value="time">Time</option>
-                </select>
+                <h2 class="fs-title">Fuel Economy</h2>
+                <h3 class="fs-subtitle">Please Enter Your Vehicle's Fuel Economy</h3>
+                <div class="fuelEconomySliderContainer">
+                    <input type="range" min="0" max="60" step=5 value="30" class="fuelEconomySlider" id="fuelEconomy"name ="fuelEconomy">
+                    <p class="fs-subtitle"><span id="sliderInput"></span> MPG or MPGe equivalent</p>
+                </div>
             </br>
             <input type="button" name="previous" class="previous action-button" value="Previous" />
             <input type="button" name="next" class="next action-button" value="Next" />
