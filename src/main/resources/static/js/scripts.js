@@ -101,7 +101,13 @@
             cost: '.cost parseFloat',
             carbon: '.carbon parseFloat',
             time: '.time parseFloat'
-        }
+        },
+        filter: function() {
+            // _this_ is the item element. Get text of element's .number
+            var isFilterd = $(this).find('.isFilterd').text();
+            // return true to show, false to hide
+            return isFilterd == "false";
+          }
 
     });
 
