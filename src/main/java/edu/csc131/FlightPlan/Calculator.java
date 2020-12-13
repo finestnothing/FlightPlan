@@ -1,21 +1,22 @@
 package edu.csc131.FlightPlan;
+
+import java.io.File; 
+import java.io.FileInputStream; 
+import java.io.FileNotFoundException; 
+import java.io.IOException; 
+import org.apache.poi.xssf.usermodel.XSSFSheet; 
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+
 /**
  * Calculates the total cost/carbon emission of a trip for given transportation mode
  * Should read and store cost/carbon for mile for each mode
  */
 public class Calculator { //this is pretty useless. Being able to multiply is sure a difficult function to create
    //Car
-   private double sedan_cost_per_mile=0.7163;
-   private double crossover_cost_per_mile=0.6573;
-   private double suv_cost_per_mile=0.8208;
-   private double green_cost_per_mile=0.6888;
-   private double motorcycle_cost_per_mile=0.4032;
-
-   private double sedan_c02_per_mile=0.59;
-   private double crossover_c02_per_mile=1.1;
-   private double suv_c02_per_mile=1.57;
-   private double green_c02_per_mile=0.65;
-   private double motorcycle_c02_per_mile=0.36;
+   private double carbon_per_gallon_fuel=8887; //number in grams. must convert to pounds using conversion rate
+   private double grams_to_lbs_conversion_rate=0.00220462;
+   private double cost_per_gallon_fuel=3.50;
 
    //Bicycle
    private double bike_cost_per_mile=0.2643;
@@ -27,50 +28,86 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
    private double walk_cost_per_mile=0.3264;
    private double walk_c02_per_mile=0.0926;
 
+   private int weeks_per_semester=16;                 /* check on this info */
+   private int cost_parking_pass_per_semester=170;
+   private int cost_parking_pass_per_trip=5;
+
+   
+   Calculator() {
+      try {
+         File excel = new File("src/main/resources/CarbonCostData.xlsx");
+         FileInputStream stream = new FileInputStream(excel);
+         XSSFWorkbook book = new XSSFWorkbook(stream);
+         XSSFSheet sheet = book.getSheetAt(0);
+         carbon_per_gallon_fuel = sheet.getRow(0).getCell(1).getNumericCellValue();
+         grams_to_lbs_conversion_rate = sheet.getRow(1).getCell(1).getNumericCellValue();
+         cost_per_gallon_fuel = sheet.getRow(2).getCell(1).getNumericCellValue();
+         bike_cost_per_mile = sheet.getRow(3).getCell(1).getNumericCellValue();
+         bike_c02_per_mile = sheet.getRow(4).getCell(1).getNumericCellValue();
+         transit_cost_per_mile = sheet.getRow(5).getCell(1).getNumericCellValue();
+         transit_c02_per_mile = sheet.getRow(6).getCell(1).getNumericCellValue();
+         walk_cost_per_mile = sheet.getRow(7).getCell(1).getNumericCellValue();
+         walk_c02_per_mile = sheet.getRow(8).getCell(1).getNumericCellValue();
+         weeks_per_semester = (int) sheet.getRow(9).getCell(1).getNumericCellValue();
+         cost_parking_pass_per_semester = (int) sheet.getRow(10).getCell(1).getNumericCellValue();
+         cost_parking_pass_per_trip = (int) sheet.getRow(11).getCell(1).getNumericCellValue();
+         System.out.println("Hello worrld");
+         book.close();
+      }
+      catch (FileNotFoundException e) {
+
+      }
+      catch (IOException e) {
+
+      }
+      finally {
+
+      }
+      
+      
+   }
+
+
    /**
     * Calculate cost of total trip by vehicle type.
     * @param distance
-    * @param vehicle_type
+    * @param mpg
     * @return cost
     */
-   double getCarCost(double distance, String vehicle_type) {
-      switch (vehicle_type)
-      {
-         case "Sedan":
-            return sedan_cost_per_mile*distance;
-         case "Crossover":
-            return crossover_cost_per_mile*distance;
-         case "SUV":
-            return suv_cost_per_mile*distance;
-         case "Green":
-            return green_cost_per_mile*distance;
-         case "Motorcycle":
-            return motorcycle_cost_per_mile*distance;
-      }
-      return 0;
+   double getCarCost(double distance, int mpg) {
+      return distance*cost_per_gallon_fuel/mpg + cost_parking_pass_per_trip; //assumed 5 dollars to park
    }
 
    /**
     * Calculate carbon produced during trip, by vehicle type.
     * @param distance
-    * @param vehicle_type
+    * @param mpg
     * @return carbon emitted
     */
-   double getCarC02(double distance, String vehicle_type) {
-      switch (vehicle_type)
-      {
-         case "Sedan":
-            return sedan_c02_per_mile*distance;
-         case "Crossover":
-            return crossover_c02_per_mile*distance;
-         case "SUV":
-            return suv_c02_per_mile*distance;
-         case "Green":
-            return green_c02_per_mile*distance;
-         case "Motorcycle":
-            return motorcycle_c02_per_mile*distance;
-      }
-      return 0;
+   double getCarC02(double distance, int mpg) {
+      return (distance*carbon_per_gallon_fuel/mpg)*grams_to_lbs_conversion_rate;
+   }
+   /**
+    * Calculates total cost of driving for a semester, includes cost of parking pass
+    * @param tripsPerWeek
+    * @param distance
+    * @param mpg
+    * @return cost per semester
+    */
+   double getCarCostPerSemester(int tripsPerWeek, double distance, int mpg) {
+      double costPerTrip = getCarCost(distance, mpg) - cost_parking_pass_per_trip;
+      double costPerSemester = costPerTrip*weeks_per_semester*tripsPerWeek*2 + cost_parking_pass_per_semester;
+      return costPerSemester;
+   }
+   /**
+    * Calculates total c02 emissions of driving for a semester
+    * @param tripsPerWeek
+    * @param distance
+    * @param mpg
+    * @return c02 per semester
+    */
+   double getCarC02PerSemester(int tripsPerWeek, double distance, int mpg) {
+      return getCarC02(distance, mpg)*tripsPerWeek*weeks_per_semester*2; //multiply by two for each direction
    }
 
    /**
@@ -89,6 +126,24 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
    double getBikeC02(double distance) {
       return bike_c02_per_mile*distance;
    }
+   /**
+    * Calculates total cost of biking for a semester
+    * @param tripsPerWeek
+    * @param distance
+    * @return cost per semester
+    */
+   double getBikeCostPerSemester(int tripsPerWeek, double distance) {
+      return getBikeCost(distance)*tripsPerWeek*weeks_per_semester*2;
+   }
+   /**
+    * Calculates total c02 of biking for a semester
+    * @param tripsPerWeek
+    * @param distance
+    * @return c02 per semester
+    */
+   double getBikeC02PerSemester(int tripsPerWeek, double distance) {
+      return getBikeC02(distance)*tripsPerWeek*weeks_per_semester*2;
+   }
 
    /**
     * Calculate total cost of the trip by transit (should be 0 for foreseeable future)
@@ -105,6 +160,24 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
     */
    double getTransitC02(double distance) {
       return transit_c02_per_mile*distance;
+   }
+   /**
+    * Calculates total cost of transit trip per semester
+    * @param tripsPerWeek
+    * @param distance
+    * @return cost per semester
+    */
+   double getTransitCostPerSemester(int tripsPerWeek, double distance) {
+      return getTransitCost(distance)*tripsPerWeek*weeks_per_semester*2;
+   }
+   /**
+    * Calculates total c02 emissions for transit trip per semester
+    * @param tripsPerWeek
+    * @param distance
+    * @return c02 per semester
+    */
+   double getTransitC02PerSemester(int tripsPerWeek, double distance) {
+      return getTransitC02(distance)*tripsPerWeek*weeks_per_semester*2;
    }
 
    /**
@@ -123,5 +196,22 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
    double getWalkC02(double distance) {
       return walk_c02_per_mile*distance;
    }
-
+   /**
+    * Calculates total walk cost per semester
+    * @param tripsPerWeek
+    * @param distance
+    * @return cost per semester
+    */
+   double getWalkCostPerSemester(int tripsPerWeek, double distance) {
+      return getWalkCost(distance)*tripsPerWeek*weeks_per_semester*2;
    }
+   /**
+    * Calculates total c02 of walking per semester
+    * @param tripsPerWeek
+    * @param distance
+    * @return c02 per semester
+    */
+   double getWalkC02PerSemester(int tripsPerWeek, double distance) {
+      return getWalkC02(distance)*tripsPerWeek*weeks_per_semester*2;
+   }
+}

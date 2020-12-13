@@ -362,3 +362,40 @@ body {
     font: 700 1.8rem/2rem "Montserrat", sans-serif;
   }
 }
+
+
+/*slider bar*/
+.fuelEconomysliderContainer {
+  width: 100%;
+}
+
+.fuelEconomySlider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 10px;
+  border-radius: 30px;
+  background: white;
+  outline: none;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.fuelEconomySlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 0;
+  background: #27AE60;
+  cursor: pointer;
+}
+
+.fuelEconomySlider::-moz-range-thumb {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 0;
+  background: #27AE60;
+  cursor: pointer;
+}
