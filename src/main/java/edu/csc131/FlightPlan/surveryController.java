@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * <i>Here be dragons.</i> This class contains the controler for flightPlan. It
  * contains the post and get methods. We are using Spring. It is a framework
- * that heavely uses anotations to do a lot of fancy things, really rather
- * easiely.
+ * that heavily uses anotations to do a lot of fancy things, really rather
+ * easily.
  *
  * @author ingrumm
  */
@@ -59,20 +59,24 @@ public class surveryController {
     }
     // Get times
     double travelTimeByCar = Double.parseDouble(time.getTimeByCar());
+    double travelTimeByCarpool = (2/3)*Double.parseDouble(time.getTimeByCar()); //1/3 time reduction compared to Car
     double travelTimeByWalk = Double.parseDouble(time.getTimeByWalking());
     double travelTimeByTransit = Double.parseDouble(time.getTimeByTransportation());
+    double travelTimeByShuttle = Double.parseDouble(time.getTimeByTransportation()); //same time as transit
     double travelTimeByBike = Double.parseDouble(time.getTimeByBike());
     System.out.println("HEREisIt:"+travelTimeByBike);
 
     //Get Distance
     double travelDistanceByCar = Double.parseDouble(time.getDistanceByCar());
+    double travelDistanceByCarpool = Double.parseDouble(time.getDistanceByCar()); //same distance as car
     double travelDistanceByWalking = Double.parseDouble(time.getDistanceByWalking());
     double travelDistanceByTransit = Double.parseDouble(time.getDistanceByTransportation());
+    double travelDistanceByShuttle = Double.parseDouble(time.getDistanceByTransportation()); //same distance as transit (if less than 5 miles suggest shuttle)
     double travelDistanceByBike = Double.parseDouble(time.getDistanceByBike());
 
       //Creates Ranking object
          Ranking r = new Ranking(travelDistanceByWalking, travelTimeByWalk, travelDistanceByBike, travelDistanceByBike,
-                                 travelDistanceByTransit, travelTimeByTransit, travelDistanceByCar, travelTimeByCar, fuelEconomy);
+                                 travelDistanceByTransit, travelTimeByTransit, travelDistanceByCar, travelTimeByCar, travelTimeByCarpool, travelDistanceByCarpool, travelTimeByShuttle, travelDistanceByShuttle, fuelEconomy);
 
 
       /* NOTE:
