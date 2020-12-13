@@ -96,13 +96,19 @@
     var $grid = $('.grid').isotope({
         // options
         itemSelector: '.element-item',
-        layoutMode: 'fitRows'
+        layoutMode: 'fitRows',
+        getSortData: {
+            cost: '.cost parseFloat',
+            carbon: '.carbon parseFloat',
+            time: '.time parseFloat'
+        }
+
     });
     
-    // filter items on button click
+    // SORT items on button click
     $('.filters-button-group').on( 'click', 'a', function() {
-        var filterValue = $(this).attr('data-filter');
-        $grid.isotope({ filter: filterValue });
+        var sortByValue = $(this).attr('data-filter');
+        $grid.isotope({ sortBy: sortByValue });
     });
     
     // change is-checked class on buttons

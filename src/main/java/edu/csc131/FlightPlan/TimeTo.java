@@ -128,6 +128,7 @@ public class TimeTo {
       if(!json.equals("")){
 
         timeByWalking = parser.getTime(json);
+        System.out.println("Walk time: "+timeByWalking);
         distanceByWalking = parser.getDistance(json);
       }else{
         timeByWalking = "ERROR";
@@ -202,6 +203,7 @@ public class TimeTo {
         }
         if(!json.equals("")){
           timeByBike = parser.getTime(json);
+          System.out.println("Bike time: "+timeByBike);
           distanceByBike = parser.getDistance(json);
         }else{
           timeByBike = "ERROR";
