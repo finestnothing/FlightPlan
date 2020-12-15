@@ -12,7 +12,7 @@ public class UserData {
     private Integer id;
 
     private String address;//remove Me After Testing
-    private String carType;
+    private int carMPG;
     private String preferredRank;
     private double travelTimeByCar;
     private double travelTimeByWalking;
@@ -63,12 +63,12 @@ public class UserData {
         this.travelTimeByWalking = travelTimeByWalking;
     }
 
-    public String getCarType() {
-        return carType;
+    public int getCarMPG() {
+        return carMPG;
     }
 
-    public void setCarType(String carType) {
-        this.carType = carType;
+    public void setCarMPG(int carMPG) {
+        this.carMPG = carMPG;
     }
 
     public double getTravelTimeByCar() {

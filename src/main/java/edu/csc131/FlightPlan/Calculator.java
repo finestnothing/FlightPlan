@@ -31,6 +31,7 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
    private int weeks_per_semester=16;                 /* check on this info */
    private int cost_parking_pass_per_semester=170;
    private int cost_parking_pass_per_trip=5;
+   private double meter_to_m_constant=0.00062137119;
 
    
    Calculator() {
@@ -51,7 +52,6 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
          weeks_per_semester = (int) sheet.getRow(9).getCell(1).getNumericCellValue();
          cost_parking_pass_per_semester = (int) sheet.getRow(10).getCell(1).getNumericCellValue();
          cost_parking_pass_per_trip = (int) sheet.getRow(11).getCell(1).getNumericCellValue();
-         System.out.println("Hello worrld");
          book.close();
       }
       catch (FileNotFoundException e) {
@@ -75,7 +75,9 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
     * @return cost
     */
    double getCarCost(double distance, int mpg) {
-      return distance*cost_per_gallon_fuel/mpg + cost_parking_pass_per_trip; //assumed 5 dollars to park
+      if (mpg == 0)
+         ++mpg;
+      return distance*meter_to_m_constant*cost_per_gallon_fuel/mpg + cost_parking_pass_per_trip; //assumed 5 dollars to park
    }
 
    /**
@@ -85,7 +87,9 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
     * @return carbon emitted
     */
    double getCarC02(double distance, int mpg) {
-      return (distance*carbon_per_gallon_fuel/mpg)*grams_to_lbs_conversion_rate;
+      if (mpg == 0)
+         ++mpg;
+      return (distance*meter_to_m_constant*carbon_per_gallon_fuel/mpg)*grams_to_lbs_conversion_rate;
    }
    /**
     * Calculates total cost of driving for a semester, includes cost of parking pass
@@ -95,6 +99,8 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
     * @return cost per semester
     */
    double getCarCostPerSemester(int tripsPerWeek, double distance, int mpg) {
+      if (mpg == 0)
+         ++mpg;
       double costPerTrip = getCarCost(distance, mpg) - cost_parking_pass_per_trip;
       double costPerSemester = costPerTrip*weeks_per_semester*tripsPerWeek*2 + cost_parking_pass_per_semester;
       return costPerSemester;
@@ -107,6 +113,8 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
     * @return c02 per semester
     */
    double getCarC02PerSemester(int tripsPerWeek, double distance, int mpg) {
+      if (mpg == 0)
+         ++mpg;
       return getCarC02(distance, mpg)*tripsPerWeek*weeks_per_semester*2; //multiply by two for each direction
    }
 
@@ -116,7 +124,7 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
     * @return cost
     */
    double getBikeCost(double distance) {
-      return bike_cost_per_mile*distance;
+      return bike_cost_per_mile*meter_to_m_constant*distance;
    }
    /**
     * Calculate total carbon produced by bicycle and it's rider during the trip
@@ -124,7 +132,7 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
     * @return carbon emission
     */
    double getBikeC02(double distance) {
-      return bike_c02_per_mile*distance;
+      return bike_c02_per_mile*meter_to_m_constant*distance;
    }
    /**
     * Calculates total cost of biking for a semester
@@ -151,7 +159,7 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
     * @return cost
     */
    double getTransitCost(double distance) {
-      return transit_cost_per_mile*distance;
+      return transit_cost_per_mile*meter_to_m_constant*distance;
    }
    /**
     * Calculate total carbon produced during the transit trip (adjusted per rider)
@@ -159,7 +167,7 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
     * @return cost
     */
    double getTransitC02(double distance) {
-      return transit_c02_per_mile*distance;
+      return transit_c02_per_mile*meter_to_m_constant*distance;
    }
    /**
     * Calculates total cost of transit trip per semester
@@ -186,7 +194,7 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
     * @return cost
     */
    double getWalkCost(double distance) {
-      return walk_cost_per_mile*distance;
+      return walk_cost_per_mile*meter_to_m_constant*distance;
    }
    /**
     * Calculate total carbon produced by walking trip
@@ -194,7 +202,7 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
     * @return cost
     */
    double getWalkC02(double distance) {
-      return walk_c02_per_mile*distance;
+      return walk_c02_per_mile*meter_to_m_constant*distance;
    }
    /**
     * Calculates total walk cost per semester

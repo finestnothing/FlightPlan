@@ -89,7 +89,7 @@ public class surveryController {
       */
     userData.setUserEmail(email);
     userData.setAddress(address);
-    //userData.setPreferredRank(preferredRank);
+    userData.setCarMPG(fuelEconomy);
 
     userData.settravelTimeByCar(travelTimeByCar);
     userData.setTravelTimeByWalking(travelTimeByWalk);
@@ -142,6 +142,17 @@ public class surveryController {
     model.addAttribute("rankCost", userData.getRankCost());
 
     FormatOutput format = new FormatOutput();
+
+    model.addAttribute("carCostFormatted", format.getCostFormatted(userData.getRankCost()[0]));
+    model.addAttribute("transitCostFormatted", format.getCostFormatted(userData.getRankCost()[1]));
+    model.addAttribute("bikeCostFormatted", format.getCostFormatted(userData.getRankCost()[2]));
+    model.addAttribute("walkCostFormatted", format.getCostFormatted(userData.getRankCost()[3]));
+
+    model.addAttribute("carC02Formatted", format.getC02Formatted(userData.getRankCarbon()[0]));
+    model.addAttribute("transitC02Formatted", format.getC02Formatted(userData.getRankCarbon()[1]));
+    model.addAttribute("bikeC02Formatted", format.getC02Formatted(userData.getRankCarbon()[2]));
+    model.addAttribute("walkC02Formatted", format.getC02Formatted(userData.getRankCarbon()[3]));
+
     model.addAttribute("travelTimeByCarString", format.getTimeFormatted(userData.gettravelTimeByCar()));
     model.addAttribute("travelTimeByTransitString", format.getTimeFormatted(userData.getTravelTimeByTransit()));
     model.addAttribute("travelTimeByBikeString", format.getTimeFormatted(userData.getTravelTimeByBike()));
