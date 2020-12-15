@@ -189,6 +189,10 @@ body {
 #rank {
   margin-bottom: 10px;
 }
+.disclaimer {
+	font-size: 50%;
+  line-height: 50%;
+}
 
 /* Survey Adjustments */
 @media screen and (min-width: 2550px) {
