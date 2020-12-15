@@ -17,6 +17,7 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
    private double carbon_per_gallon_fuel=8887; //number in grams. must convert to pounds using conversion rate
    private double grams_to_lbs_conversion_rate=0.00220462;
    private double cost_per_gallon_fuel=3.50;
+   private double cost_per_mile_nonfuel=0.28;
 
    //Bicycle
    private double bike_cost_per_mile=0.2643;
@@ -33,6 +34,8 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
    private int cost_parking_pass_per_trip=5;
    private double meter_to_m_constant=0.00062137119;
 
+   private int carMPG=30; //store for later user
+
    
    Calculator() {
       try {
@@ -43,15 +46,16 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
          carbon_per_gallon_fuel = sheet.getRow(0).getCell(1).getNumericCellValue();
          grams_to_lbs_conversion_rate = sheet.getRow(1).getCell(1).getNumericCellValue();
          cost_per_gallon_fuel = sheet.getRow(2).getCell(1).getNumericCellValue();
-         bike_cost_per_mile = sheet.getRow(3).getCell(1).getNumericCellValue();
-         bike_c02_per_mile = sheet.getRow(4).getCell(1).getNumericCellValue();
-         transit_cost_per_mile = sheet.getRow(5).getCell(1).getNumericCellValue();
-         transit_c02_per_mile = sheet.getRow(6).getCell(1).getNumericCellValue();
-         walk_cost_per_mile = sheet.getRow(7).getCell(1).getNumericCellValue();
-         walk_c02_per_mile = sheet.getRow(8).getCell(1).getNumericCellValue();
-         weeks_per_semester = (int) sheet.getRow(9).getCell(1).getNumericCellValue();
-         cost_parking_pass_per_semester = (int) sheet.getRow(10).getCell(1).getNumericCellValue();
-         cost_parking_pass_per_trip = (int) sheet.getRow(11).getCell(1).getNumericCellValue();
+         cost_per_mile_nonfuel = sheet.getRow(3).getCell(1).getNumericCellValue();
+         bike_cost_per_mile = sheet.getRow(4).getCell(1).getNumericCellValue();
+         bike_c02_per_mile = sheet.getRow(5).getCell(1).getNumericCellValue();
+         transit_cost_per_mile = sheet.getRow(6).getCell(1).getNumericCellValue();
+         transit_c02_per_mile = sheet.getRow(7).getCell(1).getNumericCellValue();
+         walk_cost_per_mile = sheet.getRow(8).getCell(1).getNumericCellValue();
+         walk_c02_per_mile = sheet.getRow(9).getCell(1).getNumericCellValue();
+         weeks_per_semester = (int) sheet.getRow(10).getCell(1).getNumericCellValue();
+         cost_parking_pass_per_semester = (int) sheet.getRow(11).getCell(1).getNumericCellValue();
+         cost_parking_pass_per_trip = (int) sheet.getRow(12).getCell(1).getNumericCellValue();
          book.close();
       }
       catch (FileNotFoundException e) {
@@ -77,7 +81,8 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
    double getCarCost(double distance, int mpg) {
       if (mpg == 0)
          ++mpg;
-      return distance*meter_to_m_constant*cost_per_gallon_fuel/mpg + cost_parking_pass_per_trip; //assumed 5 dollars to park
+      carMPG=mpg;
+      return distance*meter_to_m_constant*cost_per_gallon_fuel/mpg + cost_per_mile_nonfuel*distance*meter_to_m_constant + cost_parking_pass_per_trip; //assumed 5 dollars to park
    }
 
    /**
@@ -89,6 +94,7 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
    double getCarC02(double distance, int mpg) {
       if (mpg == 0)
          ++mpg;
+      carMPG=mpg;
       return (distance*meter_to_m_constant*carbon_per_gallon_fuel/mpg)*grams_to_lbs_conversion_rate;
    }
    /**
@@ -159,7 +165,26 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
     * @return cost
     */
    double getTransitCost(double distance) {
-      return transit_cost_per_mile*meter_to_m_constant*distance;
+      if (distance*meter_to_m_constant > 20) {
+         double carTrip = getCarCost(distance/4, carMPG) - cost_parking_pass_per_trip;
+         double transitTrip = transit_cost_per_mile*meter_to_m_constant*distance*3/4;
+         return carTrip + transitTrip;
+      }
+      else if (distance*meter_to_m_constant > 10) {
+         double carTrip = getCarCost(distance/6, carMPG) - cost_parking_pass_per_trip;
+         double transitTrip = transit_cost_per_mile*meter_to_m_constant*distance*5/6;
+         return carTrip + transitTrip;
+      }
+      else if (distance*meter_to_m_constant > 5) {
+         double walkTrip = getWalkCost(distance/5);
+         double transitTrip = transit_cost_per_mile*meter_to_m_constant*distance*4/5;
+         return walkTrip + transitTrip;
+      }
+      else {
+         double walkTrip = getWalkCost(distance/4);
+         double transitTrip = transit_cost_per_mile*meter_to_m_constant*distance*3/4;
+         return walkTrip + transitTrip;
+      }
    }
    /**
     * Calculate total carbon produced during the transit trip (adjusted per rider)
@@ -167,7 +192,26 @@ public class Calculator { //this is pretty useless. Being able to multiply is su
     * @return cost
     */
    double getTransitC02(double distance) {
-      return transit_c02_per_mile*meter_to_m_constant*distance;
+      if (distance*meter_to_m_constant > 20) {
+         double carTrip = getCarC02(distance/4, carMPG);
+         double transitTrip = transit_c02_per_mile*meter_to_m_constant*distance*3/4;
+         return carTrip + transitTrip;
+      }
+      else if (distance*meter_to_m_constant > 10) {
+         double carTrip = getCarC02(distance/6, carMPG);
+         double transitTrip = transit_c02_per_mile*meter_to_m_constant*distance*5/6;
+         return carTrip + transitTrip;
+      }
+      else if (distance*meter_to_m_constant > 5) {
+         double walkTrip = getWalkC02(distance/5);
+         double transitTrip = transit_c02_per_mile*meter_to_m_constant*distance*4/5;
+         return walkTrip + transitTrip;
+      }
+      else {
+         double walkTrip = getWalkC02(distance/4);
+         double transitTrip = transit_c02_per_mile*meter_to_m_constant*distance*3/4;
+         return walkTrip + transitTrip;
+      }
    }
    /**
     * Calculates total cost of transit trip per semester

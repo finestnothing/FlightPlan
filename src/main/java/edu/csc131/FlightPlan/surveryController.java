@@ -147,11 +147,13 @@ public class surveryController {
     model.addAttribute("transitCostFormatted", format.getCostFormatted(userData.getRankCost()[1]));
     model.addAttribute("bikeCostFormatted", format.getCostFormatted(userData.getRankCost()[2]));
     model.addAttribute("walkCostFormatted", format.getCostFormatted(userData.getRankCost()[3]));
+    model.addAttribute("carpoolCostFormatted", format.getCostFormatted(userData.getRankCost()[0]*2/3));
 
     model.addAttribute("carC02Formatted", format.getC02Formatted(userData.getRankCarbon()[0]));
     model.addAttribute("transitC02Formatted", format.getC02Formatted(userData.getRankCarbon()[1]));
     model.addAttribute("bikeC02Formatted", format.getC02Formatted(userData.getRankCarbon()[2]));
     model.addAttribute("walkC02Formatted", format.getC02Formatted(userData.getRankCarbon()[3]));
+    model.addAttribute("carpoolC02Formatted", format.getC02Formatted(userData.getRankCarbon()[0]*2/3));
 
     model.addAttribute("travelTimeByCarString", format.getTimeFormatted(userData.gettravelTimeByCar()));
     model.addAttribute("travelTimeByTransitString", format.getTimeFormatted(userData.getTravelTimeByTransit()));

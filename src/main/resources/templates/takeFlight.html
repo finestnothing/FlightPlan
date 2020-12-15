@@ -140,9 +140,13 @@
                 <hr class="line-heading">
                 <h3>CAR</h3>
                 <hr class="line-heading">
-                <p>Estimated trip cost: $<span th:text="${carCostFormatted}"></span></p>
-                <p>Estimated trip footprint: <span th:text="${carC02Formatted}"></span> lbs</p>
-                <a class="btn-outline-reg mfp-close as-button" href="#projects">BACK</a> 
+                <a href="https://m.uber.com/ul/?action=setPickup&client_id=S2Y8mc13W9ceWCPx4pUwDyOQPdTrr54F&pickup=my_location&dropoff[formatted_address]=Sacramento%20State%2C%20J%20Street%2C%20Sacramento%2C%20CA%2C%20USA&dropoff[latitude]=38.566882&dropoff[longitude]=-121.427070" target="_blank">Get a ride with Uber!</a>
+                <p></p>
+                <p>Estimated cost: $<span th:text="${carCostFormatted}"></span><span font-size=50%>*</span></p>
+                <p>Estimated CO&#8322; footprint: <span th:text="${carC02Formatted}"></span> lbs**</p>
+                <a class="btn-outline-reg mfp-close as-button" href="#projects">BACK</a>
+                <p class="asterisk-one">*based on fuel, parking, wear and tear averages (AAA)*</p>
+                <p class="asterisk-two">**based on carbon produced by burning fuel**</p>
             </div> <!-- end of col -->
         </div> <!-- end of row -->
     </div> <!-- end of lightbox-basic -->
@@ -165,12 +169,13 @@
                 <hr class="line-heading">
                 <h3>CARPOOL</h3>
                 <hr class="line-heading">
-                <a href="https://sacregion511.org/#/">Check Out the Sac Region alternative route tool to find someone to carppo with!</a>
-                <a href="https://m.uber.com/ul/?action=setPickup&client_id=S2Y8mc13W9ceWCPx4pUwDyOQPdTrr54F&pickup=my_location&dropoff[formatted_address]=Sacramento%20State%2C%20J%20Street%2C%20Sacramento%2C%20CA%2C%20USA&dropoff[latitude]=38.566882&dropoff[longitude]=-121.427070">Get a ride with Uber!</a>
+                <a href="https://sacregion511.org/#/" target="_blank">Find someone to carpool with!</a>
                 <p></p>
-                <p>Estimated trip cost: $<span th:text="${carCostFormatted}"></span></p>
-                <p>Estimated trip footprint: <span th:text="${carC02Formatted}"></span> lbs</p>
+                <p>Estimated cost: $<span th:text="${carpoolCostFormatted}"></span>*</p>
+                <p>Estimated CO&#8322; footprint: <span th:text="${carpoolC02Formatted}"></span> lbs**</p>
                 <a class="btn-outline-reg mfp-close as-button" href="#projects">BACK</a> 
+                <p class="asterisk-one">*based on fuel, parking, wear and tear averages (AAA)*</p>
+                <p class="asterisk-two">** based on carbon produced by burning fuel**</p>
             </div> <!-- end of col -->
         </div> <!-- end of row -->
     </div> <!-- end of lightbox-basic -->
@@ -198,9 +203,13 @@
                 <hr class="line-heading">
                 <h3>SAC TRANSIT</h3>
                 <hr class="line-heading">
-                <p>Estimated trip cost: $<span th:text="${transitCostFormatted}"></span></p>
-                <p>Estimated trip footprint: <span th:text="${transitC02Formatted}"></span> lbs</p>
+                <a href="https://www.csus.edu/parking-transportation/alternative-transportation/commuter-sleeve.html" target="_blank">Get your Sac State commuter sleeve</a>
+                <p></p>
+                <p>Estimated cost: $<span th:text="${transitCostFormatted}"></span>*</p>
+                <p>Estimated CO&#8322; footprint: <span th:text="${transitC02Formatted}"></span> lbs**</p>
                 <a class="btn-outline-reg mfp-close as-button" href="#projects">BACK</a> 
+                <p class="asterisk-one">*based on cost to/from station*</p>
+                <p class="asterisk-two">**based on comparible information**</p>
             </div> <!-- end of col -->
         </div> <!-- end of row -->
     </div> <!-- end of lightbox-basic -->
@@ -223,9 +232,13 @@
                 <hr class="line-heading">
                 <h3>SHUTTLE</h3>
                 <hr class="line-heading">
-                <p>Estimated trip cost: $<span th:text="${transitCostFormatted}"></span></p>
-                <p>Estimated trip footprint: <span th:text="${transitC02Formatted}"></span> lbs</p>
-                <a class="btn-outline-reg mfp-close as-button" href="#projects">BACK</a> 
+                <a href="https://www.csus.edu/parking-transportation/alternative-transportation/commuter-sleeve.html" target="_blank">Get your Sac State commuter sleeve</a>
+                <p></p>
+                <p>Estimated cost: $<span th:text="${transitCostFormatted}"></span>*</p>
+                <p>Estimated CO&#8322; footprint: <span th:text="${transitC02Formatted}"></span> lbs**</p>
+                <a class="btn-outline-reg mfp-close as-button" href="#projects">BACK</a>
+                <p class="asterisk-one">*based on cost to/from station*</p>
+                <p class="asterisk-two">**based on comparibly information**</p>
             </div> <!-- end of col -->
         </div> <!-- end of row -->
     </div> <!-- end of lightbox-basic -->
@@ -253,9 +266,13 @@
                 <hr class="line-heading">
                 <h3>BIKING</h3>
                 <hr class="line-heading">
-                <p>Estimated trip cost: $<span th:text="${bikeCostFormatted}"></span></p>
-                <p>Estimated trip footprint: <span th:text="${bikeC02Formatted}"></span> lbs</p>
-                <a class="btn-outline-reg mfp-close as-button" href="#projects">BACK</a> 
+                <a href="https://www.csus.edu/parking-transportation/alternative-transportation/bicycles.html" target="_blank">Ease of mind bicycle parking</a>
+                <p></p>
+                <p>Estimated cost: $<span th:text="${bikeCostFormatted}"></span>*</p>
+                <p>Estimated CO&#8322; footprint: <span th:text="${bikeC02Formatted}"></span> lbs**</p>
+                <a class="btn-outline-reg mfp-close as-button" href="#projects">BACK</a>
+                <p class="asterisk-one">*food costs from increased caloric needs*</p>
+                <p class="asterisk-two">**average C02 of producing food**</p> 
             </div> <!-- end of col -->
         </div> <!-- end of row -->
     </div> <!-- end of lightbox-basic -->
@@ -282,9 +299,11 @@
             <div class="col-lg-4">
                 <hr class="line-heading">
                 <h3>WALKING</h3>
-                <p>Estimated trip cost: $<span th:text="${walkCostFormatted}"></span></p>
-                <p>Estimated trip footprint: <span th:text="${walkC02Formatted}"></span> lbs</p>
-                <a class="btn-outline-reg mfp-close as-button" href="#projects">BACK</a> 
+                <p>Increase your heart health by walking!</p>
+                <p>Estimated cost: $<span th:text="${walkCostFormatted}"></span>*</p>
+                <p>Estimated CO&#8322; footprint: <span th:text="${walkC02Formatted}"></span> lbs**</p>                <a class="btn-outline-reg mfp-close as-button" href="#projects">BACK</a> 
+                <p class="asterisk-one">*food costs from increased caloric needs*</p>
+                <p class="asterisk-two">**average C02 of producing food**</p>
             </div> <!-- end of col -->
         </div> <!-- end of row -->
     </div> <!-- end of lightbox-basic -->
